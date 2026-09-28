@@ -58,9 +58,8 @@ export function Sidebar({
       >
         <div className="border-b border-white/15 px-[16px] py-3.5">
           <div className="flex items-start">
-            <div className="flex-1 rounded-[10px] bg-white px-3 py-2">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/fls-logo.png" alt="FLS GROUP" className="mx-auto h-8 w-auto" />
+            <div className="flex h-12 flex-1 items-center justify-center rounded-[10px] bg-white px-3">
+              <span className="text-[19px] font-extrabold tracking-tight text-[#e41e2b]">DC Chainat</span>
             </div>
             <button
               onClick={onClose}
@@ -71,7 +70,6 @@ export function Sidebar({
             </button>
           </div>
           <div className="mt-2 text-center leading-tight">
-            <div className="text-[13.5px] font-bold text-white">DC Chainat</div>
             <div className="text-[10px] text-[#ffd6d8]">Created by Kritsana.P</div>
           </div>
         </div>
