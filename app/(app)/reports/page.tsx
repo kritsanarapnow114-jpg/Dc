@@ -3,8 +3,7 @@ import { Money } from "@/components/ui/Currency";
 import { fmtDateISO } from "@/lib/calc/date";
 import { PeriodSelector } from "@/components/ui/PeriodSelector";
 import { resolvePeriod } from "@/lib/calc/period";
-import { getReportData, getReportProductOptions } from "@/lib/views/reports";
-import { ReportsStockCard } from "./ReportsStockCard";
+import { getReportData } from "@/lib/views/reports";
 import { ReportRunner } from "./ReportRunner";
 
 export default async function ReportsPage({
@@ -15,7 +14,7 @@ export default async function ReportsPage({
   const params = await searchParams;
   const { mode, range, dateStr, startStr, endStr } = resolvePeriod(params);
 
-  const [data, products] = await Promise.all([getReportData(range), getReportProductOptions()]);
+  const data = await getReportData(range);
 
   return (
     <div className="max-w-[1280px] p-[24px_26px]">
@@ -26,7 +25,7 @@ export default async function ReportsPage({
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Card>
           <div className="mb-2 text-[12px] text-[#69748a]">Received (รับเข้า)</div>
-          <div className="font-num text-[24px] font-bold tracking-tight text-[#a8121c]">
+          <div className="font-num text-[24px] font-bold tracking-tight text-[#1b7a48]">
             {data.receiving.totalUnits.toLocaleString()}
           </div>
           <div className="mt-1.5 text-[11.5px] text-[#9aa4b4]">{data.receiving.docCount} docs</div>
@@ -69,7 +68,7 @@ export default async function ReportsPage({
         </Card>
         <Card>
           <div className="mb-2 text-[12px] text-[#69748a]">Stock Count accuracy (นับสต็อก)</div>
-          <div className="font-num text-[20px] font-bold tracking-tight text-[#d71f28]">
+          <div className="font-num text-[20px] font-bold tracking-tight text-[#16202e]">
             {data.count.accuracyPct.toFixed(1)}%
           </div>
           <div className="mt-1.5 text-[11.5px] text-[#9aa4b4]">{data.count.docCount} docs · {data.count.lineCount} lines</div>
@@ -77,14 +76,6 @@ export default async function ReportsPage({
       </div>
 
       <ReportRunner start={fmtDateISO(range.start)} end={fmtDateISO(range.end)} />
-
-      {products.length > 0 && (
-        <ReportsStockCard
-          products={products}
-          start={fmtDateISO(range.start)}
-          end={fmtDateISO(range.end)}
-        />
-      )}
     </div>
   );
 }

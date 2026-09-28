@@ -107,6 +107,12 @@ const PATHS: Record<string, ReactNode> = {
       <path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />
     </>
   ),
+  stockcard: (
+    <>
+      <rect x="4.5" y="3" width="15" height="18" rx="2" />
+      <path d="M8 8h8M8 12h8M8 16h5" />
+    </>
+  ),
   reports: (
     <>
       <path d="M3.5 21h17" />

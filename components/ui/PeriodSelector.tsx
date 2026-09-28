@@ -18,8 +18,11 @@ export function PeriodSelector({
   date,
   start,
   end,
+  keep,
 }: {
   basePath: string;
+  /** Extra query params to carry along when the period changes (e.g. ?code=). */
+  keep?: Record<string, string>;
   mode: PeriodMode;
   date: string;
   start: string;
@@ -32,7 +35,7 @@ export function PeriodSelector({
   const [e, setE] = useState(end);
 
   function go(newMode: PeriodMode, params: Record<string, string>) {
-    const qs = new URLSearchParams({ mode: newMode, ...params });
+    const qs = new URLSearchParams({ ...keep, mode: newMode, ...params });
     router.push(`${basePath}?${qs.toString()}`);
   }
 

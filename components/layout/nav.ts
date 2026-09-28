@@ -21,6 +21,7 @@ export const NAV_ITEMS: NavItem[] = [
   { key: "adjust", href: "/adjust", icon: "◆", en: "Adjust", th: "ปรับปรุงสต็อก" },
   { key: "transfer", href: "/transfer", icon: "⇄", en: "Put Away", th: "จัดเก็บเข้าที่" },
   { key: "count", href: "/count", icon: "☑", en: "Stock Count", th: "นับสต็อก" },
+  { key: "stockcard", href: "/stock-card", icon: "▤", en: "Stock Card", th: "การ์ดสต็อก" },
   { key: "abc", href: "/abc", icon: "◧", en: "ABC Analysis", th: "วิเคราะห์ ABC" },
   { key: "reports", href: "/reports", icon: "▥", en: "Reports", th: "รายงานสรุป" },
 ];
@@ -35,7 +36,7 @@ export const NAV_GROUPS: NavGroup[] = [
     key: "inventory",
     en: "Inventory",
     th: "สินค้าคงคลัง",
-    items: ["products", "aging", "locations", "map", "adjust", "count"],
+    items: ["products", "stockcard", "aging", "locations", "map", "adjust", "count"],
   },
   { key: "inbound", en: "Inbound", th: "ขาเข้า", items: ["receive", "po", "transfer", "returns"] },
   { key: "outbound", en: "Outbound", th: "ขาออก", items: ["ship", "issue", "customers"] },
@@ -62,8 +63,9 @@ export const PAGE_TITLES: Record<string, { title: string; sub: string }> = {
   "/adjust": { title: "Adjust", sub: "ปรับปรุงสต็อก · Stock adjustment" },
   "/transfer": { title: "Put Away", sub: "จัดเก็บเข้าที่ · Bin-to-bin" },
   "/count": { title: "Stock Count", sub: "นับสต็อก · Cycle count" },
+  "/stock-card": { title: "Stock Card", sub: "การ์ดสต็อก · ความเคลื่อนไหวรายสินค้า (รับ/จ่าย/คงเหลือ)" },
   "/abc": { title: "ABC Analysis", sub: "วิเคราะห์ ABC · Pareto by value (A/B/C)" },
-  "/reports": { title: "Reports", sub: "รายงานสรุป · Receiving, Issuing, Loss, Returns, PO, Transfer, Stock Card" },
+  "/reports": { title: "Reports", sub: "รายงานสรุป · Receiving, Issuing, Loss, Returns, PO, Transfer" },
   "/settings": { title: "Settings", sub: "ตั้งค่า · Data management" },
   "/search": { title: "Search", sub: "ค้นหา · สินค้า / PO / Invoice / SAP Material Document / Lot" },
 };
