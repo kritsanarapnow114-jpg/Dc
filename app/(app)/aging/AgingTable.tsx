@@ -69,7 +69,7 @@ export function AgingTable({ rows }: { rows: AgingRow[] }) {
                     <Td>
                       <button
                         onClick={() => toggle(r.lotKey)}
-                        className="flex items-center gap-1 rounded-[7px] border border-[#dce2ea] bg-white px-2 py-1 text-[11.5px] font-medium text-[#5b6473] hover:border-[#e41e2b] hover:text-[#e41e2b]"
+                        className="flex items-center gap-1 rounded-[7px] border border-[#dce2ea] bg-white px-2 py-1 text-[11.5px] font-medium text-[#5b6473] hover:border-[#d71f28] hover:text-[#d71f28]"
                       >
                         <span className="font-num text-[9px]">{isOpen ? "▼" : "▶"}</span>
                         {r.bins.length === 1

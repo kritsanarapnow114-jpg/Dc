@@ -84,7 +84,7 @@ export function UsersCard({ users }: { users: UserRow[] }) {
             key={u.id}
             className="flex items-center gap-3 border-t border-[#eef1f5] py-2.5 text-[13px] first:border-t-0"
           >
-            <div className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[#fdeced] text-[11.5px] font-semibold text-[#a8121c]">
+            <div className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-[#fbeff0] text-[11.5px] font-semibold text-[#a8121c]">
               {u.avatarInitials}
             </div>
             <div className="flex-1">
@@ -101,7 +101,7 @@ export function UsersCard({ users }: { users: UserRow[] }) {
                   router.refresh();
                 }
               }}
-              className="rounded-[7px] border border-[#d7dce4] px-2 py-1 text-[11.5px] outline-none focus:border-[#e41e2b]"
+              className="rounded-[7px] border border-[#d7dce4] px-2 py-1 text-[11.5px] outline-none focus:border-[#d71f28]"
             >
               {PERMISSION_OPTIONS.map((p) => (
                 <option key={p} value={p}>
@@ -131,4 +131,4 @@ export function UsersCard({ users }: { users: UserRow[] }) {
 }
 
 const inputClass =
-  "rounded-[7px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]";
+  "rounded-[7px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#d71f28]";

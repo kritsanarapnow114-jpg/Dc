@@ -190,7 +190,7 @@ export function ReceiveForm({ data }: { data: ReceiveFormData }) {
         <div className="flex flex-wrap items-center gap-4 border-b border-[#eef1f5] p-[18px_22px]">
           <div>
             <div className="mb-1 text-[11.5px] text-[#69748a]">Receipt No. (เลขที่รับ) · auto</div>
-            <div className="font-num text-[16px] font-semibold text-[#e41e2b]">{data.docNo}</div>
+            <div className="font-num text-[16px] font-semibold text-[#d71f28]">{data.docNo}</div>
           </div>
           <div className="h-[34px] w-px bg-[#e2e6ec]" />
           <div>
@@ -211,7 +211,7 @@ export function ReceiveForm({ data }: { data: ReceiveFormData }) {
                 ]}
                 onSelect={selectPo}
                 placeholder="พิมพ์ค้นหา PO / ผู้ขาย…"
-                className="font-num w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[13px] outline-none focus:border-[#e41e2b]"
+                className="font-num w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[13px] outline-none focus:border-[#d71f28]"
               />
             </div>
           </div>
@@ -334,7 +334,7 @@ export function ReceiveForm({ data }: { data: ReceiveFormData }) {
                       <button
                         onClick={() => splitLine(i)}
                         title="รับอีก Lot ของสินค้าตัวนี้ (split into another lot)"
-                        className="rounded-[6px] border border-[#cfe6d9] bg-[#fdeced] px-2 py-0.5 text-[13px] font-semibold text-[#b0141f] hover:bg-[#d6eef4]"
+                        className="rounded-[6px] border border-[#cfe6d9] bg-[#fbeff0] px-2 py-0.5 text-[13px] font-semibold text-[#b0141f] hover:bg-[#d6eef4]"
                       >
                         ＋Lot
                       </button>

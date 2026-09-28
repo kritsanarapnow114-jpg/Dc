@@ -94,7 +94,7 @@ export function MovementChart({
         <div className="flex-1 text-[14px] font-semibold">
           Stock Movement (ความเคลื่อนไหว)
         </div>
-        <button onClick={() => setOpen(true)} className="text-[12px] text-[#f0474f]">
+        <button onClick={() => setOpen(true)} className="text-[12px] text-[#1f9d63]">
           Detail →
         </button>
         <div className="text-[11.5px] text-[#9aa4b4]">
@@ -102,7 +102,7 @@ export function MovementChart({
         </div>
         <div className="flex w-full gap-3.5 text-[11.5px]">
           <span className="flex items-center gap-1.5">
-            <span className="h-2.5 w-2.5 rounded-[3px] bg-[#f0474f]" />
+            <span className="h-2.5 w-2.5 rounded-[3px] bg-[#1f9d63]" />
             Received (รับเข้า)
           </span>
           <span className="flex items-center gap-1.5">
@@ -114,8 +114,8 @@ export function MovementChart({
       <svg ref={svgRef} viewBox={`0 0 ${W} ${H}`} className="block w-full">
         <defs>
           <linearGradient id="recvGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#f0474f" stopOpacity="0.30" />
-            <stop offset="100%" stopColor="#f0474f" stopOpacity="0" />
+            <stop offset="0%" stopColor="#1f9d63" stopOpacity="0.30" />
+            <stop offset="100%" stopColor="#1f9d63" stopOpacity="0" />
           </linearGradient>
         </defs>
         {grid.map((y, i) => (
@@ -123,12 +123,12 @@ export function MovementChart({
         ))}
         <path d={recvArea} fill="url(#recvGrad)" />
         <path d={issueLine} fill="none" stroke="#6c5ce7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d={recvLine} fill="none" stroke="#f0474f" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round" />
+        <path d={recvLine} fill="none" stroke="#1f9d63" strokeWidth="2.75" strokeLinecap="round" strokeLinejoin="round" />
 
         {/* end dots when idle */}
         {!hp && last && (
           <>
-            <circle cx={last.x} cy={last.yRecv} r="3.5" fill="#f0474f" stroke="#fff" strokeWidth="1.5" />
+            <circle cx={last.x} cy={last.yRecv} r="3.5" fill="#1f9d63" stroke="#fff" strokeWidth="1.5" />
             <circle cx={last.x} cy={last.yIssue} r="3.5" fill="#6c5ce7" stroke="#fff" strokeWidth="1.5" />
           </>
         )}
@@ -141,7 +141,7 @@ export function MovementChart({
         {hp && (
           <g>
             <line x1={hp.x} y1={PADT - 6} x2={hp.x} y2={baseY} stroke="#c4ccd8" strokeWidth="1" strokeDasharray="3 3" />
-            <circle cx={hp.x} cy={hp.yRecv} r="4" fill="#f0474f" stroke="#fff" strokeWidth="1.5" />
+            <circle cx={hp.x} cy={hp.yRecv} r="4" fill="#1f9d63" stroke="#fff" strokeWidth="1.5" />
             <circle cx={hp.x} cy={hp.yIssue} r="4" fill="#6c5ce7" stroke="#fff" strokeWidth="1.5" />
             <rect x={tx} y="4" width={TW} height={TH} rx="7" fill="#ffffff" stroke="#e2e6ec" strokeWidth="1" />
             <text x={tx + 10} y="20" fontSize="11" fontWeight="700" fill="#16202e">{hp.label}</text>

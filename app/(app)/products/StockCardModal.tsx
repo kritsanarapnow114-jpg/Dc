@@ -48,7 +48,7 @@ export function StockCardModal({
         action={
           <a
             href={`/api/export/stock-card/${code}`}
-            className="rounded-[8px] border border-[#e41e2b] bg-[#fdeced] px-2.5 py-1.5 text-[12px] font-semibold text-[#b0141f]"
+            className="rounded-[8px] border border-[#9fd3b5] bg-[#eaf6ef] px-2.5 py-1.5 text-[12px] font-semibold text-[#1b7a48]"
           >
             ⤓ Excel
           </a>

@@ -133,7 +133,7 @@ export function ProductDrawer({
                     {REORDER_LABEL[rs]}
                   </span>
                   <span className="flex-1" />
-                  <button onClick={() => setEditOpen(true)} className="text-[11.5px] font-medium text-[#e41e2b]">
+                  <button onClick={() => setEditOpen(true)} className="text-[11.5px] font-medium text-[#d71f28]">
                     กำหนดเอง →
                   </button>
                 </div>
@@ -254,7 +254,7 @@ function LotRow({ lot, onChanged }: { lot: LotRowData; onChanged: () => void }) 
               title={lot.status === "QC" ? "ปลด QC ล็อตนี้" : "Hold QC เฉพาะล็อตนี้"}
               className={`rounded-[6px] border px-1.5 py-0.5 text-[10.5px] font-semibold ${
                 lot.status === "QC"
-                  ? "border-[#bfe0d3] bg-[#fdeced] text-[#0e8ea6]"
+                  ? "border-[#bfe0d3] bg-[#fbeff0] text-[#0e8ea6]"
                   : "border-[#f0cf9a] bg-[#fff2df] text-[#b5790f]"
               }`}
             >
@@ -326,7 +326,7 @@ function LotEditModal({
           <input
             value={lotNo}
             onChange={(e) => setLotNo(e.target.value)}
-            className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+            className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
           />
         </label>
         <div className="grid grid-cols-2 gap-3">
@@ -336,7 +336,7 @@ function LotEditModal({
               type="date"
               value={mfg}
               onChange={(e) => setMfg(e.target.value)}
-              className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+              className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
             />
           </label>
           <label className="flex flex-col gap-1">
@@ -345,7 +345,7 @@ function LotEditModal({
               type="date"
               value={exp}
               onChange={(e) => setExp(e.target.value)}
-              className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+              className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
             />
           </label>
         </div>

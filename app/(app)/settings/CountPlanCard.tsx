@@ -37,7 +37,7 @@ export function CountPlanCard({
   }
 
   const numClass =
-    "w-full rounded-[8px] border border-[#d7dce4] px-2 py-1.5 text-center text-[13px] outline-none focus:border-[#e41e2b]";
+    "w-full rounded-[8px] border border-[#d7dce4] px-2 py-1.5 text-center text-[13px] outline-none focus:border-[#d71f28]";
 
   return (
     <Card>

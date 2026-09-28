@@ -21,7 +21,7 @@ export function LoginForm({ next }: { next: string }) {
           type="text"
           required
           autoFocus
-          className="rounded-[8px] border border-[#d7dce4] px-3 py-2.5 text-[13px] outline-none focus:border-[#e41e2b]"
+          className="rounded-[8px] border border-[#d7dce4] px-3 py-2.5 text-[13px] outline-none focus:border-[#d71f28]"
         />
       </label>
       <label className="flex flex-col gap-1.5">
@@ -32,7 +32,7 @@ export function LoginForm({ next }: { next: string }) {
           name="password"
           type="password"
           required
-          className="rounded-[8px] border border-[#d7dce4] px-3 py-2.5 text-[13px] outline-none focus:border-[#e41e2b]"
+          className="rounded-[8px] border border-[#d7dce4] px-3 py-2.5 text-[13px] outline-none focus:border-[#d71f28]"
         />
       </label>
       {state.error && (
@@ -43,7 +43,7 @@ export function LoginForm({ next }: { next: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="mt-1.5 rounded-[9px] bg-[#e41e2b] px-4 py-2.5 text-[13.5px] font-semibold text-white disabled:opacity-60"
+        className="mt-1.5 rounded-[9px] bg-[#d71f28] px-4 py-2.5 text-[13.5px] font-semibold text-white disabled:opacity-60"
       >
         {pending ? "Signing in… (กำลังเข้าสู่ระบบ)" : "Sign in (เข้าสู่ระบบ)"}
       </button>

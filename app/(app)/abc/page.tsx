@@ -3,7 +3,7 @@ import { getAbcAnalysis, AbcBasis, AbcClass } from "@/lib/views/abc";
 import { Card } from "@/components/ui/Card";
 import { Money } from "@/components/ui/Currency";
 
-const CLASS_COLOR: Record<AbcClass, string> = { A: "#e41e2b", B: "#e59a2b", C: "#94a3b8" };
+const CLASS_COLOR: Record<AbcClass, string> = { A: "#d71f28", B: "#e59a2b", C: "#94a3b8" };
 const CLASS_DESC: Record<AbcClass, string> = {
   A: "มูลค่าสูงสุด ~80% · คุมเข้ม นับบ่อย",
   B: "มูลค่ารองลงมา ~15% · คุมปานกลาง",
@@ -34,7 +34,7 @@ export default async function AbcPage({
               key={t.value}
               href={`/abc?basis=${t.value}`}
               className={`rounded-full px-3.5 py-1.5 text-[12.5px] font-medium ${
-                active ? "bg-[#e41e2b] text-white" : "border border-[#e2e6ec] bg-white text-[#3a4658]"
+                active ? "bg-[#d71f28] text-white" : "border border-[#e2e6ec] bg-white text-[#3a4658]"
               }`}
             >
               {t.label}
@@ -47,7 +47,7 @@ export default async function AbcPage({
         </div>
         <a
           href={`/api/export/abc?basis=${basis}`}
-          className="flex items-center gap-1.5 rounded-[8px] border border-[#e41e2b] bg-[#fdeced] px-3.5 py-2 text-[12.5px] font-semibold text-[#b0141f]"
+          className="flex items-center gap-1.5 rounded-[8px] border border-[#9fd3b5] bg-[#eaf6ef] px-3.5 py-2 text-[12.5px] font-semibold text-[#1b7a48]"
         >
           ⤓ Export Excel
         </a>

@@ -51,15 +51,15 @@ export function Sidebar({
         />
       )}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-[240px] flex-none flex-col text-[#fdeced] shadow-[2px_0_16px_rgba(13,20,36,.12)] transition-transform duration-200 lg:sticky lg:top-0 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-[240px] flex-none flex-col text-[#e6e8ec] shadow-[2px_0_16px_rgba(13,20,36,.12)] transition-transform duration-200 lg:sticky lg:top-0 lg:translate-x-0 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ background: "linear-gradient(180deg,#e8313c,#8f0e16)" }}
+        style={{ background: "linear-gradient(180deg,#2a2f37,#1b1f25)" }}
       >
-        <div className="border-b border-white/15 px-[16px] py-3.5">
+        <div className="border-b border-white/10 px-[16px] py-3.5">
           <div className="flex items-start">
             <div className="flex h-12 flex-1 items-center justify-center rounded-[10px] bg-white px-3">
-              <span className="text-[19px] font-extrabold tracking-tight text-[#e41e2b]">DC Chainat</span>
+              <span className="text-[19px] font-extrabold tracking-tight text-[#d71f28]">DC Chainat</span>
             </div>
             <button
               onClick={onClose}
@@ -70,7 +70,7 @@ export function Sidebar({
             </button>
           </div>
           <div className="mt-2 text-center leading-tight">
-            <div className="text-[10px] text-[#ffd6d8]">Created by Kritsana.P</div>
+            <div className="text-[10px] text-[#8b95a5]">Created by Kritsana.P</div>
           </div>
         </div>
 
@@ -100,22 +100,22 @@ export function Sidebar({
                       href={item.href}
                       onClick={onClose}
                       className={`flex items-center gap-2.5 rounded-[9px] px-3 py-2 text-[13px] ${
-                        active ? "bg-white text-[#8f0e16]" : "bg-white/[.06] text-[#fdeced] hover:bg-white/[.12]"
+                        active ? "bg-[#d71f28] text-white shadow-[0_2px_8px_rgba(215,31,40,.35)]" : "text-[#e6e8ec] hover:bg-white/[.07]"
                       }`}
                     >
-                      <span className={`flex w-[22px] flex-none items-center justify-center ${active ? "text-[#8f0e16]" : "text-white/90"}`}>
+                      <span className={`flex w-[22px] flex-none items-center justify-center ${active ? "text-white" : "text-[#aab2bf]"}`}>
                         <NavIcon name={item.key} />
                       </span>
                       <span className="flex-1 text-left leading-tight">
                         <span className="block">{item.en}</span>
-                        <span className={`block text-[10px] ${active ? "text-[#5fa987]" : "text-[#bfe4d1]"}`}>
+                        <span className={`block text-[10px] ${active ? "text-[#ffd9db]" : "text-[#8b95a5]"}`}>
                           ({item.th})
                         </span>
                       </span>
                       {badge !== null && (
                         <span
                           className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-                            active ? "bg-[#8f0e16]/15 text-[#8f0e16]" : "bg-[#c53f3f] text-white"
+                            active ? "bg-white/25 text-white" : "bg-[#d71f28] text-white"
                           }`}
                         >
                           {badge}
@@ -135,8 +135,8 @@ export function Sidebar({
           onClick={onClose}
           className={`mx-3 mb-1 flex items-center gap-2.5 rounded-[9px] px-3 py-2 text-[12px] ${
             pathname.startsWith("/settings")
-              ? "bg-white text-[#8f0e16]"
-              : "bg-white/[.06] text-[#ffd6d8] hover:bg-white/[.12]"
+              ? "bg-[#d71f28] text-white"
+              : "text-[#aab2bf] hover:bg-white/[.07]"
           }`}
         >
           <span className="flex w-[22px] flex-none items-center justify-center">
@@ -147,21 +147,21 @@ export function Sidebar({
 
         <form
           action={logoutAction}
-          className="flex items-center gap-2.5 border-t border-white/15 px-4 py-3.5"
+          className="flex items-center gap-2.5 border-t border-white/10 px-4 py-3.5"
         >
-          <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-white/[.22] text-[12px] font-semibold text-white">
+          <div className="flex h-[30px] w-[30px] items-center justify-center rounded-full bg-[#d71f28] text-[12px] font-semibold text-white">
             {user.avatarInitials}
           </div>
           <div className="flex-1 leading-tight">
             <div className="text-[12.5px] font-medium text-white">
               {user.name}
             </div>
-            <div className="text-[10.5px] text-[#ffd6d8]">{user.role}</div>
+            <div className="text-[10.5px] text-[#8b95a5]">{user.role}</div>
           </div>
           <button
             type="submit"
             title="Sign out"
-            className="rounded-[7px] px-2 py-1 text-[11px] text-[#ffd6d8] hover:bg-white/[.12]"
+            className="rounded-[7px] px-2 py-1 text-[11px] text-[#aab2bf] hover:bg-white/[.07]"
           >
             Exit
           </button>

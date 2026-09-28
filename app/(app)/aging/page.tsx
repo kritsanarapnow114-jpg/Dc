@@ -88,7 +88,7 @@ export default async function AgingPage({
               href={`/aging${qs({ filter: f.value === "all" ? "" : f.value })}`}
               className={`rounded-full px-3.5 py-1.5 text-[12.5px] font-medium ${
                 active
-                  ? "bg-[#e41e2b] text-white"
+                  ? "bg-[#d71f28] text-white"
                   : "border border-[#e2e6ec] bg-white text-[#3a4658]"
               }`}
             >

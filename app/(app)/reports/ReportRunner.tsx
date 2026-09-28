@@ -45,7 +45,7 @@ export function ReportRunner({ start, end }: { start: string; end: string }) {
         <button
           onClick={run}
           disabled={loading}
-          className="flex items-center gap-1.5 rounded-[8px] bg-[#e41e2b] px-4 py-2 text-[12.5px] font-semibold text-white hover:bg-[#a8121c] disabled:opacity-60"
+          className="flex items-center gap-1.5 rounded-[8px] bg-[#d71f28] px-4 py-2 text-[12.5px] font-semibold text-white hover:bg-[#a8121c] disabled:opacity-60"
         >
           {loading ? "กำลังโหลด…" : "▶ แสดงข้อมูล (Execute)"}
         </button>
@@ -53,7 +53,7 @@ export function ReportRunner({ start, end }: { start: string; end: string }) {
         {data && shownType && (
           <a
             href={exportHref}
-            className="flex items-center gap-1.5 rounded-[8px] border border-[#e41e2b] bg-[#fdeced] px-3.5 py-2 text-[12.5px] font-semibold text-[#b0141f]"
+            className="flex items-center gap-1.5 rounded-[8px] border border-[#9fd3b5] bg-[#eaf6ef] px-3.5 py-2 text-[12.5px] font-semibold text-[#1b7a48]"
           >
             ⤓ Export Excel
           </a>

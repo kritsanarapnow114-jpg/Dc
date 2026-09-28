@@ -289,7 +289,7 @@ export function ShipTable({
                       <select
                         value={editShipToId}
                         onChange={(e) => setEditShipToId(e.target.value)}
-                        className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+                        className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
                       >
                         <option value="">—</option>
                         {(editCustomer?.shipTos ?? []).map((s) => (
@@ -306,7 +306,7 @@ export function ShipTable({
                         type="date"
                         value={editOrderDate}
                         onChange={(e) => setEditOrderDate(e.target.value)}
-                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                     <label className="flex flex-col gap-1">
@@ -315,7 +315,7 @@ export function ShipTable({
                         type="date"
                         value={editShipDate}
                         onChange={(e) => setEditShipDate(e.target.value)}
-                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                     <label className="flex flex-col gap-1">
@@ -323,7 +323,7 @@ export function ShipTable({
                       <input
                         value={editTracking}
                         onChange={(e) => setEditTracking(e.target.value)}
-                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                   </div>
@@ -332,7 +332,7 @@ export function ShipTable({
                     <input
                       value={editRemark}
                       onChange={(e) => setEditRemark(e.target.value)}
-                      className="rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
+                      className="rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#d71f28]"
                     />
                   </label>
                   <div className="mt-3 flex justify-end gap-2">
@@ -469,7 +469,7 @@ export function ShipTable({
                         type="date"
                         value={shipDate}
                         onChange={(e) => setShipDate(e.target.value)}
-                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]"
+                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                     <label className="flex flex-1 flex-col gap-1">
@@ -478,7 +478,7 @@ export function ShipTable({
                         value={shipTracking}
                         onChange={(e) => setShipTracking(e.target.value)}
                         placeholder="เลขติดตาม/ขนส่ง"
-                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]"
+                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                     <button
@@ -543,7 +543,7 @@ export function ShipTable({
                           .map((p) => ({ value: p.code, label: `${p.code} · ${p.name}` }))}
                         onSelect={addDraftLine}
                         placeholder="+ เพิ่มสินค้า (พิมพ์ค้นหา)…"
-                        className="w-full rounded-[7px] border border-dashed border-[#c4ccd8] bg-white px-2.5 py-1.5 text-[12.5px] text-[#3a4658] outline-none focus:border-[#e41e2b]"
+                        className="w-full rounded-[7px] border border-dashed border-[#c4ccd8] bg-white px-2.5 py-1.5 text-[12.5px] text-[#3a4658] outline-none focus:border-[#d71f28]"
                       />
                     </div>
                     {newLines.length > 0 && (

@@ -72,7 +72,7 @@ function printDoc(title: string, row: DocHistoryRow, sheet?: "count") {
 export function DocHistory({
   title,
   rows,
-  accentColor = "#e41e2b",
+  accentColor = "#d71f28",
   reverseKind,
   printSheet,
   productOptions,
@@ -223,7 +223,7 @@ export function DocHistory({
           type="date"
           value={filterDate}
           onChange={(e) => setFilterDate(e.target.value)}
-          className="font-num rounded-[7px] border border-[#d7dce4] px-2 py-1 text-[12px] outline-none focus:border-[#e41e2b]"
+          className="font-num rounded-[7px] border border-[#d7dce4] px-2 py-1 text-[12px] outline-none focus:border-[#d71f28]"
         />
         {filterDate && (
           <button
@@ -325,7 +325,7 @@ export function DocHistory({
                           {l.edit && (
                             <button
                               onClick={() => setEditingLine(l.edit!)}
-                              className="rounded-[7px] border border-[#d7dce4] bg-white px-2 py-1 text-[11.5px] font-medium text-[#e41e2b] hover:bg-[#f0f6fc]"
+                              className="rounded-[7px] border border-[#d7dce4] bg-white px-2 py-1 text-[11.5px] font-medium text-[#d71f28] hover:bg-[#f0f6fc]"
                             >
                               ✎ แก้ไข
                             </button>
@@ -351,7 +351,7 @@ export function DocHistory({
                         value={matDoc}
                         onChange={(e) => setMatDoc(e.target.value)}
                         placeholder="เช่น 4900012345"
-                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]"
+                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                     <label className="flex flex-col gap-1">
@@ -360,7 +360,7 @@ export function DocHistory({
                         value={remark}
                         onChange={(e) => setRemark(e.target.value)}
                         placeholder="หมายเหตุเพิ่มเติม"
-                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]"
+                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#d71f28]"
                       />
                     </label>
                     {metaError && (
@@ -372,7 +372,7 @@ export function DocHistory({
                       <button
                         onClick={handleSaveMeta}
                         disabled={savingMeta || !metaDirty}
-                        className="rounded-[8px] bg-[#e41e2b] px-3.5 py-1.5 text-[12.5px] font-semibold text-white hover:bg-[#a8121c] disabled:opacity-50"
+                        className="rounded-[8px] bg-[#d71f28] px-3.5 py-1.5 text-[12.5px] font-semibold text-white hover:bg-[#a8121c] disabled:opacity-50"
                       >
                         {savingMeta ? "กำลังบันทึก…" : "บันทึก · Save"}
                       </button>
@@ -441,7 +441,7 @@ export function DocHistory({
                   <button
                     onClick={handleRedo}
                     disabled={reversing}
-                    className="flex-none rounded-[8px] border border-[#bfe0cd] bg-[#fdeced] px-3 py-1.5 text-[12.5px] font-semibold text-[#b0141f] hover:bg-[#d6eef4] disabled:opacity-60"
+                    className="flex-none rounded-[8px] border border-[#bfe0cd] bg-[#fbeff0] px-3 py-1.5 text-[12.5px] font-semibold text-[#b0141f] hover:bg-[#d6eef4] disabled:opacity-60"
                   >
                     {reversing ? "กำลังเตรียม…" : "↻ ทำซ้ำ (Redo)"}
                   </button>

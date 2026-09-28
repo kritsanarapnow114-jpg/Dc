@@ -54,7 +54,7 @@ export function ListSettingsCard({
             value={issueToText}
             onChange={(e) => setIssueToText(e.target.value)}
             rows={6}
-            className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 font-num text-[12.5px] outline-none focus:border-[#e41e2b]"
+            className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 font-num text-[12.5px] outline-none focus:border-[#d71f28]"
           />
         </label>
         <label className="flex flex-col gap-1">
@@ -66,7 +66,7 @@ export function ListSettingsCard({
             onChange={(e) => setOpsText(e.target.value)}
             rows={6}
             placeholder="ชื่อผู้ปฏิบัติงานเพิ่มเติม (นอกเหนือจากรายชื่อผู้ใช้)"
-            className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 font-num text-[12.5px] outline-none focus:border-[#e41e2b]"
+            className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 font-num text-[12.5px] outline-none focus:border-[#d71f28]"
           />
           <span className="text-[11px] text-[#9aa4b4]">
             * รายชื่อผู้ใช้ในระบบจะแสดงให้อยู่แล้ว ช่องนี้ไว้เพิ่มชื่อพิเศษ
@@ -80,7 +80,7 @@ export function ListSettingsCard({
             value={reasonText}
             onChange={(e) => setReasonText(e.target.value)}
             rows={5}
-            className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]"
+            className="rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#d71f28]"
           />
         </label>
       </div>

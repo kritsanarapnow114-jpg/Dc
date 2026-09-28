@@ -355,7 +355,7 @@ export function IssueForm({ data, issueToOptions }: { data: IssueFormData; issue
                       </select>
                       <div className="mt-0.5">
                         {isFefo ? (
-                          <span className="rounded-full bg-[#fdeced] px-2 py-0.5 text-[10px] font-semibold text-[#b0141f]">
+                          <span className="rounded-full bg-[#fbeff0] px-2 py-0.5 text-[10px] font-semibold text-[#b0141f]">
                             FEFO
                           </span>
                         ) : (

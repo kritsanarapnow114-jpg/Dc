@@ -33,7 +33,7 @@ export default async function AdjustPage() {
   return (
     <div className="max-w-[1240px] p-[22px_26px]">
       <AdjustForm lots={lots} />
-      <DocHistory title="Recent Adjustments (ประวัติการปรับปรุง)" rows={rows} accentColor="#e41e2b" reverseKind="adjustment" />
+      <DocHistory title="Recent Adjustments (ประวัติการปรับปรุง)" rows={rows} accentColor="#d71f28" reverseKind="adjustment" />
     </div>
   );
 }
