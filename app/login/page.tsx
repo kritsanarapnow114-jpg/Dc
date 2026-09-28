@@ -22,7 +22,7 @@ export default async function LoginPage({
           <img src="/fls-logo.png" alt="FLS GROUP" className="h-11 w-auto" />
           <div className="leading-tight">
             <div className="text-[15px] font-bold text-[#16202e]">
-              NBC Warehouse
+              DC Chainat
             </div>
             <div className="text-[11px] text-[#69748a]">
               Warehouse Mgmt (ระบบคลังสินค้า)

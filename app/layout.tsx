@@ -15,7 +15,7 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NBC Warehouse",
+  title: "DC Chainat",
   description: "Warehouse Management System (ระบบคลังสินค้า)",
 };
 

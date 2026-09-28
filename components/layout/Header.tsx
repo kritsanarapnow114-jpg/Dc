@@ -20,7 +20,7 @@ export function Header({
   const pathname = usePathname();
   const router = useRouter();
   const [q, setQ] = useState("");
-  const base = PAGE_TITLES[pathname] ?? { title: "NBC Warehouse", sub: "" };
+  const base = PAGE_TITLES[pathname] ?? { title: "DC Chainat", sub: "" };
   const page = pathname.replace(/^\//, "");
   const override = subtitleOverrides?.[page];
   const info = { title: base.title, sub: override ?? base.sub };

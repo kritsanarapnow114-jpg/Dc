@@ -71,7 +71,7 @@ export function Sidebar({
             </button>
           </div>
           <div className="mt-2 text-center leading-tight">
-            <div className="text-[13.5px] font-bold text-white">NBC Warehouse</div>
+            <div className="text-[13.5px] font-bold text-white">DC Chainat</div>
             <div className="text-[10px] text-[#cfe4f6]">Warehouse Mgmt (ระบบคลังสินค้า)</div>
           </div>
         </div>
