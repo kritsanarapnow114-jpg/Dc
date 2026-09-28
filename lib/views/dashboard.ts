@@ -4,6 +4,7 @@ import { productLabel } from "@/lib/calc/productName";
 import { getAutoLevelsMap } from "@/lib/views/products";
 import { daysBetween, fmtDateBE, todayBangkok } from "@/lib/calc/date";
 import { getLotsAsOf } from "@/lib/calc/snapshot";
+import { completedAtOf, deliveryState } from "@/lib/calc/delivery";
 import { getAppSettings } from "@/lib/views/settings";
 import { getCountPlanDetailed } from "@/lib/settingsKeys";
 import {
@@ -403,4 +404,75 @@ export async function getActionRequired(asOf: Date = todayBangkok()) {
     return effMin > 0 && (onHandByCode.get(p.code) ?? 0) < effMin;
   }).length;
   return { qcCount, expCount, overduePOs: overduePOs.map((p) => p.no), belowMin };
+}
+
+export type LateOrder = {
+  no: string;
+  customer: string;
+  due: string; // BE date
+  daysLate: number;
+};
+
+/** On-time delivery for ship orders with a due date (กำหนดส่ง).
+ *  on-time / late: orders whose last shipment went out inside the period.
+ *  overdue / dueToday / dueSoon: orders still open right now. */
+export async function getDeliveryPerformance(range: Range) {
+  const orders = await db.shipOrder.findMany({
+    where: { requestedShipDate: { not: null } },
+    select: {
+      no: true,
+      status: true,
+      requestedShipDate: true,
+      shipToName: true,
+      customer: { select: { name: true } },
+      issues: { select: { docDate: true, shippedDate: true, reversedAt: true } },
+    },
+  });
+  const today = todayBangkok();
+  let onTime = 0;
+  let late = 0;
+  let lateDaysTotal = 0;
+  let dueToday = 0;
+  let dueSoon = 0;
+  const overdue: LateOrder[] = [];
+  const lateShipped: LateOrder[] = [];
+
+  for (const so of orders) {
+    const completedAt = completedAtOf(
+      so.status,
+      so.issues.map((i) => ({ date: i.shippedDate ?? i.docDate, reversed: i.reversedAt !== null }))
+    );
+    const state = deliveryState(so.requestedShipDate, completedAt, today);
+    const row = {
+      no: so.no,
+      customer: so.shipToName ?? so.customer.name,
+      due: fmtDateBE(so.requestedShipDate!),
+      daysLate: state.days,
+    };
+    if (completedAt) {
+      if (completedAt < range.start || completedAt > range.end) continue;
+      if (state.kind === "late") {
+        late++;
+        lateDaysTotal += state.days;
+        lateShipped.push(row);
+      } else onTime++;
+    } else if (state.kind === "overdue") overdue.push(row);
+    else if (state.kind === "due-today") dueToday++;
+    else if (state.kind === "due-soon") dueSoon++;
+  }
+
+  const shipped = onTime + late;
+  overdue.sort((a, b) => b.daysLate - a.daysLate);
+  lateShipped.sort((a, b) => b.daysLate - a.daysLate);
+  return {
+    onTime,
+    late,
+    shipped,
+    onTimePct: shipped > 0 ? (onTime / shipped) * 100 : null,
+    avgLateDays: late > 0 ? lateDaysTotal / late : 0,
+    overdue,
+    lateShipped,
+    dueToday,
+    dueSoon,
+  };
 }

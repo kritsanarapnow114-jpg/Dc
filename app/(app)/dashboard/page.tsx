@@ -15,7 +15,9 @@ import {
   getCountProgress,
   getMovementBuckets,
   getActionRequired,
+  getDeliveryPerformance,
 } from "@/lib/views/dashboard";
+import { DeliveryCard } from "./DeliveryCard";
 import { MovementChart } from "./MovementChart";
 import { SlowMovingCard } from "./SlowMovingCard";
 
@@ -37,6 +39,7 @@ export default async function DashboardPage({
     countProgress,
     movementBuckets,
     actionRequired,
+    delivery,
   ] = await Promise.all([
     getInventoryStats(range),
     getStorageUtilization(range.end),
@@ -47,6 +50,7 @@ export default async function DashboardPage({
     getCountProgress(range.end),
     getMovementBuckets(range),
     getActionRequired(range.end),
+    getDeliveryPerformance(range),
   ]);
   const categoryTotal = valueByCategory.reduce((s, c) => s + c.value, 0);
 
@@ -101,6 +105,19 @@ export default async function DashboardPage({
         <Card>
           <CardTitle>Action Required (ต้องดำเนินการ)</CardTitle>
           <div className="flex flex-col gap-2.5">
+            {delivery.overdue.length > 0 && (
+              <ActionRow
+                icon="🚚"
+                bg="#fbe9e9"
+                border="#f3d2d2"
+                text={`${delivery.overdue.length} ออเดอร์เลยกำหนดส่ง (overdue)`}
+                sub={delivery.overdue.slice(0, 3).map((o) => o.no).join(", ")}
+                subColor="#a34141"
+                href="/ship"
+                cta="Ship"
+                mono
+              />
+            )}
             {actionRequired.belowMin > 0 && (
               <ActionRow
                 icon="↓"
@@ -147,6 +164,8 @@ export default async function DashboardPage({
           </div>
         </Card>
       </div>
+
+      <DeliveryCard data={delivery} />
 
       <div className="mb-4 grid grid-cols-1 gap-4 lg:grid-cols-[1.55fr_1fr]">
         <Card>

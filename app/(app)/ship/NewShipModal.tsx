@@ -108,6 +108,14 @@ function NewShipModal({
       setError("กรุณาเลือกลูกค้า (select a customer)");
       return;
     }
+    if (!requestedShipDate) {
+      setError("กรุณาระบุกำหนดส่ง (set a due date)");
+      return;
+    }
+    if (requestedShipDate < orderDate) {
+      setError("กำหนดส่งต้องไม่ก่อนวันสั่ง (due date is before the order date)");
+      return;
+    }
     setSaving(true);
     setError(null);
     const res = await createShipOrderAction({
@@ -207,7 +215,7 @@ function NewShipModal({
         )}
 
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-          <Field label="Requested ship date (วันนัดส่ง) — optional">
+          <Field label="กำหนดส่ง (Due date) *">
             <input
               type="date"
               value={requestedShipDate}

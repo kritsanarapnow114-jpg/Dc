@@ -1,5 +1,6 @@
 import "server-only";
 import { db } from "@/lib/db";
+import { completedAtOf } from "@/lib/calc/delivery";
 import { eligibleLots } from "@/lib/calc/fefo";
 import { productLabel } from "@/lib/calc/productName";
 
@@ -38,6 +39,7 @@ export type ShipRow = {
   shipToAddress: string;
   orderDate: string;
   requestedShipDate: string | null;
+  completedDate: string | null; // when the last shipment went out (COMPLETE only)
   tracking: string;
   remark: string;
   amount: number;
@@ -144,6 +146,11 @@ export async function getShipOrders(opts?: { status?: string }): Promise<ShipRow
       shipToAddress: so.shipToAddress ?? so.shipTo?.address ?? "",
       orderDate: so.orderDate.toISOString(),
       requestedShipDate: so.requestedShipDate ? so.requestedShipDate.toISOString() : null,
+      completedDate:
+        completedAtOf(
+          so.status,
+          so.issues.map((i) => ({ date: i.shippedDate ?? i.docDate, reversed: i.reversedAt !== null }))
+        )?.toISOString() ?? null,
       tracking: so.tracking ?? "",
       remark: so.remark ?? "",
       amount,

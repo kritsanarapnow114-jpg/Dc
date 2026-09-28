@@ -57,6 +57,9 @@ export async function createShipOrderAction(
     }
     const customer = await db.customer.findUnique({ where: { id: input.customerId } });
     if (!customer) return { error: "ไม่พบลูกค้า (customer not found)" };
+    if (!input.requestedShipDate) {
+      return { error: "กรุณาระบุกำหนดส่ง (a ship order needs a due date)" };
+    }
 
     const shipTo = input.shipToId
       ? await db.shipToAddress.findUnique({ where: { id: input.shipToId } })

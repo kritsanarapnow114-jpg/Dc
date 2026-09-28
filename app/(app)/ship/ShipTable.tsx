@@ -10,7 +10,8 @@ import { Modal, ModalHeader } from "@/components/ui/Modal";
 import { SearchableSelect } from "@/components/ui/SearchableSelect";
 import { buttonClass } from "@/components/ui/Button";
 import { Tone } from "@/components/ui/tone";
-import { fmtDateBE, fmtDateISO } from "@/lib/calc/date";
+import { fmtDateBE, fmtDateISO, todayBangkok } from "@/lib/calc/date";
+import { deliveryState, DeliveryKind } from "@/lib/calc/delivery";
 import { showToast } from "@/components/ui/Toast";
 import {
   deleteShipOrderAction,
@@ -172,7 +173,7 @@ export function ShipTable({
               <Th>Order No.</Th>
               <Th>Customer</Th>
               <Th>Order date</Th>
-              <Th>Ship by</Th>
+              <Th>กำหนดส่ง (Due)</Th>
               <Th align="right">Amount</Th>
               <Th>Shipped</Th>
               <Th>Status</Th>
@@ -196,8 +197,8 @@ export function ShipTable({
                 <Td className="font-num text-[12px] text-[#69748a]">
                   {fmtDateBE(new Date(so.orderDate))}
                 </Td>
-                <Td className="font-num text-[12px] text-[#69748a]">
-                  {so.requestedShipDate ? fmtDateBE(new Date(so.requestedShipDate)) : "—"}
+                <Td>
+                  <DueDate so={so} />
                 </Td>
                 <Td align="right" className="font-num font-semibold">
                   <Money value={so.amount} />
@@ -310,7 +311,7 @@ export function ShipTable({
                       />
                     </label>
                     <label className="flex flex-col gap-1">
-                      <span className="text-[11.5px] font-medium text-[#69748a]">Ship by (วันนัดส่ง)</span>
+                      <span className="text-[11.5px] font-medium text-[#69748a]">กำหนดส่ง (Due date)</span>
                       <input
                         type="date"
                         value={editShipDate}
@@ -351,10 +352,8 @@ export function ShipTable({
                     <span className="font-num text-[#16202e]">{fmtDateBE(new Date(selected.orderDate))}</span>
                   </div>
                   <div>
-                    Ship by:{" "}
-                    <span className="font-num text-[#16202e]">
-                      {selected.requestedShipDate ? fmtDateBE(new Date(selected.requestedShipDate)) : "—"}
-                    </span>
+                    กำหนดส่ง:{" "}
+                    <DueDate so={selected} />
                   </div>
                   <div>
                     Amount:{" "}
@@ -629,5 +628,31 @@ function Td({
     >
       {children}
     </td>
+  );
+}
+
+const DELIVERY_BADGE: Partial<Record<DeliveryKind, { tone: Tone; text: (d: number) => string }>> = {
+  "on-time": { tone: "ok", text: () => "ส่งตรงเวลา" },
+  late: { tone: "danger", text: (d) => `ส่งช้า ${d} วัน` },
+  overdue: { tone: "danger", text: (d) => `เลยกำหนด ${d} วัน` },
+  "due-today": { tone: "warn", text: () => "ส่งวันนี้" },
+  "due-soon": { tone: "warn", text: (d) => `อีก ${d} วัน` },
+};
+
+/** Due date plus an on-time / late / countdown badge. */
+function DueDate({ so }: { so: ShipRow }) {
+  if (!so.requestedShipDate) return <span className="font-num text-[12px] text-[#9aa4b4]">—</span>;
+  const due = new Date(so.requestedShipDate);
+  const state = deliveryState(
+    due,
+    so.completedDate ? new Date(so.completedDate) : null,
+    todayBangkok()
+  );
+  const badge = DELIVERY_BADGE[state.kind];
+  return (
+    <span className="inline-flex flex-wrap items-center gap-1.5">
+      <span className="font-num text-[12px] text-[#3a4658]">{fmtDateBE(due)}</span>
+      {badge && <Badge tone={badge.tone}>{badge.text(state.days)}</Badge>}
+    </span>
   );
 }

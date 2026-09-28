@@ -5,7 +5,7 @@ export const TONE_COLORS: Record<Tone, { bg: string; text: string }> = {
   warn: { bg: "#fbf1df", text: "#b5790f" },
   danger: { bg: "#fbe9e9", text: "#c53f3f" },
   neutral: { bg: "#eef1f5", text: "#69748a" },
-  accent: { bg: "#fbeff0", text: "#d71f28" },
+  accent: { bg: "#eaf0f8", text: "#3b5b8f" },
 };
 
 export const CATEGORY_COLORS: Record<string, string> = {
