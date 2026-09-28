@@ -3,10 +3,8 @@ import { Card, CardTitle } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { Money } from "@/components/ui/Currency";
 import { DonutChart } from "@/components/ui/DonutChart";
-import { RankList } from "@/components/ui/RankList";
 import { PeriodSelector } from "@/components/ui/PeriodSelector";
 import { resolvePeriod } from "@/lib/calc/period";
-import { kpiBand } from "@/lib/calc/kpi";
 import {
   getInventoryStats,
   getStorageUtilization,
@@ -17,10 +15,7 @@ import {
   getCountProgress,
   getMovementBuckets,
   getActionRequired,
-  getTopProductsByValue,
-  getTopVendors,
 } from "@/lib/views/dashboard";
-import { KpiBand } from "./KpiBand";
 import { MovementChart } from "./MovementChart";
 import { SlowMovingCard } from "./SlowMovingCard";
 
@@ -33,7 +28,6 @@ export default async function DashboardPage({
   const { mode, range, dateStr, startStr, endStr } = resolvePeriod(params);
 
   const [
-    kpis,
     stats,
     storage,
     valueByCategory,
@@ -43,10 +37,7 @@ export default async function DashboardPage({
     countProgress,
     movementBuckets,
     actionRequired,
-    topProducts,
-    topVendors,
   ] = await Promise.all([
-    kpiBand(range),
     getInventoryStats(range),
     getStorageUtilization(range.end),
     getValueByCategory(range.end),
@@ -56,16 +47,12 @@ export default async function DashboardPage({
     getCountProgress(range.end),
     getMovementBuckets(range),
     getActionRequired(range.end),
-    getTopProductsByValue(range.end),
-    getTopVendors(range),
   ]);
   const categoryTotal = valueByCategory.reduce((s, c) => s + c.value, 0);
 
   return (
     <div className="max-w-[1280px] p-[24px_26px]">
       <PeriodSelector basePath="/dashboard" mode={mode} date={dateStr} start={startStr} end={endStr} />
-
-      <KpiBand kpis={kpis} />
 
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
@@ -403,31 +390,6 @@ export default async function DashboardPage({
       </div>
 
       <SlowMovingCard rows={slowMoving} />
-
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <Card>
-          <CardTitle>Top 10 สินค้า · มูลค่าสูงสุด (Products by value)</CardTitle>
-          <RankList
-            items={topProducts.map((p) => ({
-              label: p.name,
-              sub: `${p.code} · ${p.share.toFixed(1)}%`,
-              value: p.value,
-              barPct: p.barPct,
-            }))}
-          />
-        </Card>
-        <Card>
-          <CardTitle>Top 10 คู่ค้า · Vendors (มูลค่ารับเข้า)</CardTitle>
-          <RankList
-            items={topVendors.map((v) => ({
-              label: v.name,
-              sub: `${v.docs} PO · ${v.share.toFixed(1)}%`,
-              value: v.value,
-              barPct: v.barPct,
-            }))}
-          />
-        </Card>
-      </div>
     </div>
   );
 }

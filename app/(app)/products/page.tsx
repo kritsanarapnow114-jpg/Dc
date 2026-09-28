@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { getProductRows } from "@/lib/views/products";
-import { Card, CardTitle } from "@/components/ui/Card";
 import { Money } from "@/components/ui/Currency";
 import { AddProductButton } from "./AddProductModal";
 import { ProductsTable } from "./ProductsTable";
@@ -21,8 +20,6 @@ export default async function ProductsPage({
   const { q, cat } = await searchParams;
   const rows = await getProductRows({ q, category: cat });
   const totalValue = rows.reduce((s, r) => s + r.totalValue, 0);
-  const maxValue = Math.max(1, ...rows.map((r) => r.totalValue));
-  const sortedByValue = [...rows].sort((a, b) => b.totalValue - a.totalValue);
 
   const qs = (extra: Record<string, string>) => {
     const p = new URLSearchParams();
@@ -72,31 +69,6 @@ export default async function ProductsPage({
       </div>
 
       <ProductsTable rows={rows} />
-
-      <Card className="mt-4">
-        <CardTitle>Inventory Value by Product (มูลค่าคงเหลือรายสินค้า)</CardTitle>
-        <div className="flex flex-col gap-3">
-          {sortedByValue.map((v) => (
-            <div key={v.code} className="flex items-center gap-3">
-              <div className="w-[210px] flex-none text-[12.5px] leading-tight">
-                <span className="font-medium">{v.nameEn}</span>{" "}
-                <span className="font-num text-[10.5px] text-[#9aa4b4]">
-                  {v.code}
-                </span>
-              </div>
-              <div className="h-[14px] flex-1 overflow-hidden rounded-[5px] bg-[#f1f3f7]">
-                <div
-                  className="h-full rounded-[5px] bg-[#2f86cf]"
-                  style={{ width: `${(v.totalValue / maxValue) * 100}%` }}
-                />
-              </div>
-              <div className="font-num w-[110px] text-right text-[12.5px]">
-                <Money value={v.totalValue} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </Card>
     </div>
   );
 }
