@@ -1,6 +1,6 @@
 export function ProgressBar({
   pct,
-  color = "#2f86cf",
+  color = "#e41e2b",
   height = 11,
   track = "#eef1f5",
 }: {

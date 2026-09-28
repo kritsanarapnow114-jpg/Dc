@@ -58,20 +58,20 @@ export function ComparePeriods({
     apply(na1, na2, nb1, nb2);
   }
 
-  const field = "font-num rounded-[8px] border border-[#d7dce4] px-2 py-1.5 text-[12.5px] outline-none focus:border-[#2f86cf]";
+  const field = "font-num rounded-[8px] border border-[#d7dce4] px-2 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]";
 
   return (
     <div className="rounded-[14px] border border-[#e7ebf1] bg-white p-4 shadow-[0_1px_3px_rgba(20,30,48,.04)]">
       <div className="mb-3 flex flex-wrap gap-2">
         <span className="text-[12px] font-semibold text-[#69748a]">ชุดเทียบด่วน:</span>
-        <button onClick={() => preset("30")} className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-1 text-[12px] font-medium text-[#3a4658] hover:border-[#2f86cf]">30 วันนี้ vs 30 วันก่อน</button>
-        <button onClick={() => preset("month")} className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-1 text-[12px] font-medium text-[#3a4658] hover:border-[#2f86cf]">เดือนนี้ vs เดือนก่อน</button>
-        <button onClick={() => preset("year")} className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-1 text-[12px] font-medium text-[#3a4658] hover:border-[#2f86cf]">ปีนี้ vs ปีก่อน</button>
+        <button onClick={() => preset("30")} className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-1 text-[12px] font-medium text-[#3a4658] hover:border-[#e41e2b]">30 วันนี้ vs 30 วันก่อน</button>
+        <button onClick={() => preset("month")} className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-1 text-[12px] font-medium text-[#3a4658] hover:border-[#e41e2b]">เดือนนี้ vs เดือนก่อน</button>
+        <button onClick={() => preset("year")} className="rounded-[8px] border border-[#d7dce4] bg-white px-2.5 py-1 text-[12px] font-medium text-[#3a4658] hover:border-[#e41e2b]">ปีนี้ vs ปีก่อน</button>
       </div>
       <div className="flex flex-wrap items-end gap-4">
         <div>
-          <div className="mb-1 flex items-center gap-1.5 text-[12px] font-bold text-[#2f86cf]">
-            <span className="h-2.5 w-2.5 rounded-full bg-[#2f86cf]" /> ช่วง A (ช่วงนี้)
+          <div className="mb-1 flex items-center gap-1.5 text-[12px] font-bold text-[#e41e2b]">
+            <span className="h-2.5 w-2.5 rounded-full bg-[#e41e2b]" /> ช่วง A (ช่วงนี้)
           </div>
           <div className="flex items-center gap-1.5">
             <input type="date" value={a1} onChange={(e) => setA1(e.target.value)} className={field} />
@@ -91,7 +91,7 @@ export function ComparePeriods({
         </div>
         <button
           onClick={() => apply()}
-          className="rounded-[9px] bg-[#2f86cf] px-4 py-2 text-[13px] font-semibold text-white hover:bg-[#1f66a6]"
+          className="rounded-[9px] bg-[#e41e2b] px-4 py-2 text-[13px] font-semibold text-white hover:bg-[#a8121c]"
         >
           เทียบ
         </button>

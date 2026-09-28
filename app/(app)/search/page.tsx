@@ -2,7 +2,7 @@ import Link from "next/link";
 import { searchAll } from "@/lib/views/search";
 
 const TAG_COLOR: Record<string, string> = {
-  Product: "#2f86cf",
+  Product: "#e41e2b",
   PO: "#7b6ef0",
   GR: "#2aa775",
   GI: "#e59a2b",
@@ -46,7 +46,7 @@ export default async function SearchPage({
                   <Link
                     key={i}
                     href={h.href}
-                    className="flex items-center gap-3 rounded-[12px] border border-[#e7ebf1] bg-white px-4 py-3 transition hover:border-[#2f86cf] hover:shadow-[0_4px_14px_rgba(20,30,48,.06)]"
+                    className="flex items-center gap-3 rounded-[12px] border border-[#e7ebf1] bg-white px-4 py-3 transition hover:border-[#e41e2b] hover:shadow-[0_4px_14px_rgba(20,30,48,.06)]"
                   >
                     <span
                       className="flex-none rounded-[6px] px-2 py-0.5 text-[10px] font-bold text-white"

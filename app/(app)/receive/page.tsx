@@ -41,7 +41,7 @@ export default async function ReceivePage() {
         <DocHistory
           title="Recent Receipts (ประวัติการรับสินค้า)"
           rows={rows}
-          accentColor="#1f66a6"
+          accentColor="#a8121c"
           reverseKind="receipt"
           productOptions={productOptions}
           locationOptions={data.locations}

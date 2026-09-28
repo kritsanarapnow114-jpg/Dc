@@ -58,7 +58,7 @@ export function AgingTable({ rows }: { rows: AgingRow[] }) {
                     ? "#c9821f"
                     : r.expKind === "none"
                       ? "#9aa4b4"
-                      : "#1f66a6";
+                      : "#a8121c";
               const isOpen = expanded.has(r.lotKey);
               return (
                 <Fragment key={r.lotKey}>
@@ -69,7 +69,7 @@ export function AgingTable({ rows }: { rows: AgingRow[] }) {
                     <Td>
                       <button
                         onClick={() => toggle(r.lotKey)}
-                        className="flex items-center gap-1 rounded-[7px] border border-[#dce2ea] bg-white px-2 py-1 text-[11.5px] font-medium text-[#5b6473] hover:border-[#2f86cf] hover:text-[#2f86cf]"
+                        className="flex items-center gap-1 rounded-[7px] border border-[#dce2ea] bg-white px-2 py-1 text-[11.5px] font-medium text-[#5b6473] hover:border-[#e41e2b] hover:text-[#e41e2b]"
                       >
                         <span className="font-num text-[9px]">{isOpen ? "▼" : "▶"}</span>
                         {r.bins.length === 1

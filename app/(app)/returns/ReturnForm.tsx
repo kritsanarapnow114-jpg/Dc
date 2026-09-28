@@ -43,7 +43,7 @@ const DISPOSITIONS: { value: ReturnDispositionInput; label: string; hint: string
   },
 ];
 
-const input = "font-num w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#2f86cf]";
+const input = "font-num w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]";
 
 export function ReturnForm({ data }: { data: ReturnFormData }) {
   const router = useRouter();
@@ -248,7 +248,7 @@ export function ReturnForm({ data }: { data: ReturnFormData }) {
                   key={i}
                   type="button"
                   onClick={() => addFromShipment(i)}
-                  className="rounded-[9px] border border-[#d7dce4] bg-white px-3 py-2 text-left text-[12px] hover:border-[#2f86cf]"
+                  className="rounded-[9px] border border-[#d7dce4] bg-white px-3 py-2 text-left text-[12px] hover:border-[#e41e2b]"
                 >
                   <span className="block font-medium text-[#16202e]">＋ {l.name}</span>
                   <span className="font-num text-[11px] text-[#69748a]">

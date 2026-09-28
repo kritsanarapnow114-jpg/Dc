@@ -111,7 +111,7 @@ export function AdjustForm({ lots }: { lots: LotOption[] }) {
         <div className="flex flex-wrap items-center gap-4 border-b border-[#eef1f5] p-[18px_22px]">
           <div>
             <div className="mb-1 text-[11.5px] text-[#69748a]">Adjustment No. · auto</div>
-            <div className="font-num text-[16px] font-semibold text-[#2f86cf]">next on confirm</div>
+            <div className="font-num text-[16px] font-semibold text-[#e41e2b]">next on confirm</div>
           </div>
           <div className="h-[34px] w-px bg-[#e2e6ec]" />
           <div>
@@ -134,10 +134,10 @@ export function AdjustForm({ lots }: { lots: LotOption[] }) {
               value={note}
               onChange={(e) => setNote(e.target.value)}
               placeholder="เช่น สินค้าเสียหายจากน้ำท่วม, นับผิด, ตกหล่น…"
-              className="w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[13px] outline-none focus:border-[#2f86cf]"
+              className="w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[13px] outline-none focus:border-[#e41e2b]"
             />
           </div>
-          <button onClick={handleExport} className="flex items-center gap-1.5 rounded-[8px] border border-[#16a6bf] bg-[#e8f2fb] px-3.5 py-2 text-[12.5px] font-semibold text-[#0c7f93]">
+          <button onClick={handleExport} className="flex items-center gap-1.5 rounded-[8px] border border-[#e41e2b] bg-[#fdeced] px-3.5 py-2 text-[12.5px] font-semibold text-[#b0141f]">
             ⤓ Export Excel
           </button>
           <div>
@@ -204,7 +204,7 @@ export function AdjustForm({ lots }: { lots: LotOption[] }) {
                     </td>
                     <td
                       className="font-num p-[11px_16px] text-right font-semibold"
-                      style={{ color: variance > 0 ? "#1f66a6" : variance < 0 ? "#d24141" : "#9aa4b4" }}
+                      style={{ color: variance > 0 ? "#a8121c" : variance < 0 ? "#d24141" : "#9aa4b4" }}
                     >
                       {variance > 0 ? `+${variance}` : variance}
                     </td>

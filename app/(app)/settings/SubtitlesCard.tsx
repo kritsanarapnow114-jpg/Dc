@@ -70,7 +70,7 @@ export function SubtitlesCard({ overrides }: { overrides: Record<string, string>
             <input
               value={values[p]}
               onChange={(e) => setValues((v) => ({ ...v, [p]: e.target.value }))}
-              className="min-w-0 flex-1 rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#2f86cf]"
+              className="min-w-0 flex-1 rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[12.5px] outline-none focus:border-[#e41e2b]"
             />
             <button
               type="button"

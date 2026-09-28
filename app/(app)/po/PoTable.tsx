@@ -214,7 +214,7 @@ export function PoTable({ rows, products = [] }: { rows: PoRow[]; products?: PoP
                       <input
                         value={editVendor}
                         onChange={(e) => setEditVendor(e.target.value)}
-                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#2f86cf]"
+                        className="rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
                       />
                     </label>
                     <label className="flex flex-col gap-1">
@@ -223,7 +223,7 @@ export function PoTable({ rows, products = [] }: { rows: PoRow[]; products?: PoP
                         type="date"
                         value={editDate}
                         onChange={(e) => setEditDate(e.target.value)}
-                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#2f86cf]"
+                        className="font-num rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
                       />
                     </label>
                   </div>
@@ -360,7 +360,7 @@ export function PoTable({ rows, products = [] }: { rows: PoRow[]; products?: PoP
                         .map((p) => ({ value: p.code, label: `${p.code} · ${p.name}` }))}
                       onSelect={addDraftLine}
                       placeholder="+ เพิ่มสินค้า (พิมพ์ค้นหา)…"
-                      className="w-full rounded-[7px] border border-dashed border-[#c4ccd8] bg-white px-2.5 py-1.5 text-[12.5px] text-[#3a4658] outline-none focus:border-[#2f86cf]"
+                      className="w-full rounded-[7px] border border-dashed border-[#c4ccd8] bg-white px-2.5 py-1.5 text-[12.5px] text-[#3a4658] outline-none focus:border-[#e41e2b]"
                     />
                   </div>
                   {newLines.length > 0 && (

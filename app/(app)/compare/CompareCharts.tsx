@@ -1,6 +1,6 @@
 import { MovementBucket } from "@/lib/views/compare";
 
-const RECV = "#2f86cf";
+const RECV = "#e41e2b";
 const ISSUE = "#e59a2b";
 
 function line(pts: { x: number; y: number }[]): string {
@@ -92,7 +92,7 @@ export function MovementCompare({ a, b }: { a: MovementBucket[]; b: MovementBuck
         <span className="text-[10.5px] text-[#9aa4b4]">(สเกลแกน Y เท่ากันทั้งสองช่วง เทียบกันได้)</span>
       </div>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        <Panel title="ช่วง A (ช่วงนี้)" buckets={a} max={max} accent="#2f86cf" />
+        <Panel title="ช่วง A (ช่วงนี้)" buckets={a} max={max} accent="#e41e2b" />
         <Panel title="ช่วง B (เทียบกับ)" buckets={b} max={max} accent="#8a94a6" />
       </div>
     </div>

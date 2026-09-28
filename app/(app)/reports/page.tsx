@@ -26,7 +26,7 @@ export default async function ReportsPage({
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Card>
           <div className="mb-2 text-[12px] text-[#69748a]">Received (รับเข้า)</div>
-          <div className="font-num text-[24px] font-bold tracking-tight text-[#1f66a6]">
+          <div className="font-num text-[24px] font-bold tracking-tight text-[#a8121c]">
             {data.receiving.totalUnits.toLocaleString()}
           </div>
           <div className="mt-1.5 text-[11.5px] text-[#9aa4b4]">{data.receiving.docCount} docs</div>
@@ -69,7 +69,7 @@ export default async function ReportsPage({
         </Card>
         <Card>
           <div className="mb-2 text-[12px] text-[#69748a]">Stock Count accuracy (นับสต็อก)</div>
-          <div className="font-num text-[20px] font-bold tracking-tight text-[#2f86cf]">
+          <div className="font-num text-[20px] font-bold tracking-tight text-[#e41e2b]">
             {data.count.accuracyPct.toFixed(1)}%
           </div>
           <div className="mt-1.5 text-[11.5px] text-[#9aa4b4]">{data.count.docCount} docs · {data.count.lineCount} lines</div>

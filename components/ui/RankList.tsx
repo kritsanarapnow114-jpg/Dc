@@ -1,7 +1,7 @@
 import { Money } from "@/components/ui/Currency";
 
 export const RANK_COLORS = [
-  "#6c5ce7", "#12b5d4", "#22c58e", "#f7a63b", "#ff6b5c",
+  "#6c5ce7", "#f0474f", "#22c58e", "#f7a63b", "#ff6b5c",
   "#4b8df8", "#a06bef", "#f0568f", "#0fb5a8", "#94a3b8",
 ];
 

@@ -36,7 +36,7 @@ export default async function TransferPage() {
   return (
     <div className="max-w-[1240px] p-[22px_26px]">
       <TransferForm lots={lots} locations={locations} operators={operators} />
-      <DocHistory title="Recent Transfers (ประวัติการย้ายที่เก็บ)" rows={rows} accentColor="#2f86cf" reverseKind="transfer" />
+      <DocHistory title="Recent Transfers (ประวัติการย้ายที่เก็บ)" rows={rows} accentColor="#e41e2b" reverseKind="transfer" />
     </div>
   );
 }

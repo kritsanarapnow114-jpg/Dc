@@ -37,8 +37,8 @@ export default async function ComparePage({
       />
 
       <div className="mb-3 mt-4 flex flex-wrap gap-4 text-[12px]">
-        <span className="flex items-center gap-1.5 font-semibold text-[#2f86cf]">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#2f86cf]" /> A · {labelA}
+        <span className="flex items-center gap-1.5 font-semibold text-[#e41e2b]">
+          <span className="h-2.5 w-2.5 rounded-full bg-[#e41e2b]" /> A · {labelA}
         </span>
         <span className="flex items-center gap-1.5 font-semibold text-[#8a94a6]">
           <span className="h-2.5 w-2.5 rounded-full bg-[#8a94a6]" /> B · {labelB}
@@ -56,7 +56,7 @@ export default async function ComparePage({
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <MoverPanel title="รับเข้าสูงสุด · Top received" a={cmp.receivedTop.a} b={cmp.receivedTop.b} accent="#1f66a6" />
+        <MoverPanel title="รับเข้าสูงสุด · Top received" a={cmp.receivedTop.a} b={cmp.receivedTop.b} accent="#a8121c" />
         <MoverPanel title="จ่ายออกสูงสุด · Top issued" a={cmp.issuedTop.a} b={cmp.issuedTop.b} accent="#c9821f" />
       </div>
 
@@ -99,9 +99,9 @@ function MetricCard({ m }: { m: CompareMetric }) {
       {/* A vs B mini bars */}
       <div className="mt-2.5 flex flex-col gap-1">
         <div className="flex items-center gap-1.5">
-          <span className="w-2.5 text-[9px] font-bold text-[#2f86cf]">A</span>
+          <span className="w-2.5 text-[9px] font-bold text-[#e41e2b]">A</span>
           <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-[#eef2f7]">
-            <div className="h-full rounded-full bg-[#2f86cf]" style={{ width: `${aw}%` }} />
+            <div className="h-full rounded-full bg-[#e41e2b]" style={{ width: `${aw}%` }} />
           </div>
         </div>
         <div className="flex items-center gap-1.5">

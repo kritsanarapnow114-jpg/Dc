@@ -77,7 +77,7 @@ export default async function LocationsPage({
               href={`/locations${qs({ zone: f.value })}`}
               className={`rounded-full px-3.5 py-1.5 text-[12.5px] font-medium ${
                 active
-                  ? "bg-[#2f86cf] text-white"
+                  ? "bg-[#e41e2b] text-white"
                   : "border border-[#e2e6ec] bg-white text-[#3a4658]"
               }`}
             >
@@ -93,7 +93,7 @@ export default async function LocationsPage({
         <AddLocationButton />
         <a
           href={`/api/export/locations${qs({})}`}
-          className="flex items-center gap-1.5 rounded-[8px] border border-[#16a6bf] bg-[#e8f2fb] px-3.5 py-2 text-[12.5px] font-semibold text-[#0c7f93]"
+          className="flex items-center gap-1.5 rounded-[8px] border border-[#e41e2b] bg-[#fdeced] px-3.5 py-2 text-[12.5px] font-semibold text-[#b0141f]"
         >
           ⤓ Export Excel
         </a>

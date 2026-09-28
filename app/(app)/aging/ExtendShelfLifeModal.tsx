@@ -17,7 +17,7 @@ export type ExtendTarget = {
 };
 
 const inputClass =
-  "w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#2f86cf]";
+  "w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]";
 
 export function ExtendShelfLifeModal({
   target,

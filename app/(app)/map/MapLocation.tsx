@@ -42,7 +42,7 @@ const STATUS: Record<StatusKey, { label: string; color: string; bg: string; bord
   partial: { label: "มีบางส่วน", color: "#c8781f", bg: "#fdf5ea", border: "#f4dcbb" },
   full: { label: "เต็ม", color: "#c0453f", bg: "#fdecec", border: "#f5cbc9" },
 };
-const ACCENT = "#2f86cf";
+const ACCENT = "#e41e2b";
 
 function pct(used: number, cap: number) {
   return cap > 0 ? Math.round((used / cap) * 100) : 0;
@@ -225,7 +225,7 @@ export function MapLocation({
           <div className="flex items-center gap-2.5">
             <span
               className="flex h-9 w-9 flex-none items-center justify-center rounded-[11px] text-[18px]"
-              style={{ background: "linear-gradient(135deg,#2f86cf,#7cc0ec)" }}
+              style={{ background: "linear-gradient(135deg,#e41e2b,#7cc0ec)" }}
             >
               ☁️
             </span>
@@ -239,7 +239,7 @@ export function MapLocation({
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="ค้นหา สินค้า / Lot / ช่อง (เช่น PACA01, A37)"
-              className="w-full rounded-[10px] border-[1.5px] border-[#d8e2ee] bg-[#f4f8fc] px-3.5 py-2.5 text-[13.5px] outline-none focus:border-[#2f86cf]"
+              className="w-full rounded-[10px] border-[1.5px] border-[#d8e2ee] bg-[#f4f8fc] px-3.5 py-2.5 text-[13.5px] outline-none focus:border-[#e41e2b]"
             />
           </div>
         </div>
@@ -345,7 +345,7 @@ export function MapLocation({
           <div className="ml-auto flex flex-wrap items-center gap-3.5">
             <button
               onClick={() => setShowLegend((v) => !v)}
-              className="rounded-full border border-[#cdd6e2] px-3 py-1 text-[11.5px] font-medium text-[#4f5a68] hover:border-[#2f86cf]"
+              className="rounded-full border border-[#cdd6e2] px-3 py-1 text-[11.5px] font-medium text-[#4f5a68] hover:border-[#e41e2b]"
             >
               {showLegend ? "ซ่อนสีสินค้า" : `สีสินค้า (${productList.length})`}
             </button>
@@ -495,7 +495,7 @@ function ZoneHeader({ tag, title, sub, used, cap }: { tag: string; title: string
   return (
     <div className="mb-4 flex flex-wrap items-center gap-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-10 w-[46px] items-center justify-center rounded-[11px] bg-[#e6f4ec] text-[13px] font-bold text-[#2f86cf]">
+        <div className="flex h-10 w-[46px] items-center justify-center rounded-[11px] bg-[#e6f4ec] text-[13px] font-bold text-[#e41e2b]">
           {tag}
         </div>
         <div>
@@ -1063,12 +1063,12 @@ function Drawer({
                             onChange={(e) => setMoveTo(e.target.value)}
                             list="allLocs"
                             placeholder="พิมพ์ช่องปลายทาง เช่น A44"
-                            className="min-w-0 flex-1 rounded-[8px] border border-[#cdd6e2] px-2 py-1.5 font-num text-[12.5px] outline-none focus:border-[#2f86cf]"
+                            className="min-w-0 flex-1 rounded-[8px] border border-[#cdd6e2] px-2 py-1.5 font-num text-[12.5px] outline-none focus:border-[#e41e2b]"
                           />
                           <button
                             onClick={() => doMove(lot)}
                             disabled={busy || !moveTo.trim()}
-                            className="flex-none rounded-[8px] bg-[#2f86cf] px-3 py-1.5 text-[12px] font-semibold text-white disabled:opacity-50"
+                            className="flex-none rounded-[8px] bg-[#e41e2b] px-3 py-1.5 text-[12px] font-semibold text-white disabled:opacity-50"
                           >
                             ย้าย
                           </button>
@@ -1082,7 +1082,7 @@ function Drawer({
                       ) : (
                         <button
                           onClick={() => { setMoveLotId(lot.id); setMoveTo(""); }}
-                          className="mt-2.5 w-full rounded-[8px] border border-[#d8e2ee] py-1.5 text-[12px] font-semibold text-[#2f86cf] hover:bg-[#f5f6ff]"
+                          className="mt-2.5 w-full rounded-[8px] border border-[#d8e2ee] py-1.5 text-[12px] font-semibold text-[#e41e2b] hover:bg-[#f5f6ff]"
                         >
                           ↔ ย้ายลอตนี้ไปช่องอื่น
                         </button>
@@ -1169,7 +1169,7 @@ function Drawer({
                   onChange={(e) => setSwapTo(e.target.value)}
                   list="allLocs"
                   placeholder={`สลับ ${cell.code} ↔ ช่อง…`}
-                  className="min-w-0 flex-1 rounded-[8px] border border-[#cdd6e2] px-2 py-1.5 font-num text-[12.5px] outline-none focus:border-[#2f86cf]"
+                  className="min-w-0 flex-1 rounded-[8px] border border-[#cdd6e2] px-2 py-1.5 font-num text-[12.5px] outline-none focus:border-[#e41e2b]"
                 />
                 <button
                   onClick={doSwap}

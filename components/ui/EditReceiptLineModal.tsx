@@ -14,7 +14,7 @@ export type EditableReceiptLine = {
   expDate: string;
 };
 
-const field = "rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[13px] outline-none focus:border-[#2f86cf]";
+const field = "rounded-[8px] border border-[#d7dce4] px-2.5 py-1.5 text-[13px] outline-none focus:border-[#e41e2b]";
 
 /** Correct one line of a posted receipt (product / lot / location / qty / dates).
  *  Stock is re-booked to match. */
@@ -124,7 +124,7 @@ export function EditReceiptLineModal({
           <button onClick={onClose} disabled={saving} className="rounded-[8px] border border-[#d7dce4] bg-white px-3.5 py-1.5 text-[12.5px] font-medium text-[#69748a] hover:bg-[#f7f9fb] disabled:opacity-50">
             Cancel
           </button>
-          <button onClick={save} disabled={saving} className="rounded-[8px] bg-[#2f86cf] px-3.5 py-1.5 text-[12.5px] font-semibold text-white hover:bg-[#1f66a6] disabled:opacity-50">
+          <button onClick={save} disabled={saving} className="rounded-[8px] bg-[#e41e2b] px-3.5 py-1.5 text-[12.5px] font-semibold text-white hover:bg-[#a8121c] disabled:opacity-50">
             {saving ? "กำลังบันทึก…" : "บันทึก · Save"}
           </button>
         </div>

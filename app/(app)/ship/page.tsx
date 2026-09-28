@@ -44,7 +44,7 @@ export default async function ShipOrderPage({
               href={`/ship${qs({ status: f.value })}`}
               className={`rounded-full px-3.5 py-1.5 text-[12.5px] font-medium ${
                 active
-                  ? "bg-[#2f86cf] text-white"
+                  ? "bg-[#e41e2b] text-white"
                   : "border border-[#e2e6ec] bg-white text-[#3a4658]"
               }`}
             >

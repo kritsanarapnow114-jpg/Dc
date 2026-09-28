@@ -276,7 +276,7 @@ function NewShipModal({
               options={available.map((p) => ({ value: p.code, label: `${p.code} · ${p.name}` }))}
               onSelect={addLine}
               placeholder="+ Add product… — พิมพ์ค้นหา"
-              className="w-full rounded-[7px] border border-dashed border-[#c4ccd8] bg-[#f7f9fb] px-2.5 py-1.5 text-[12.5px] text-[#3a4658] outline-none focus:border-[#2f86cf]"
+              className="w-full rounded-[7px] border border-dashed border-[#c4ccd8] bg-[#f7f9fb] px-2.5 py-1.5 text-[12.5px] text-[#3a4658] outline-none focus:border-[#e41e2b]"
             />
           </div>
         </div>
@@ -300,7 +300,7 @@ function NewShipModal({
 }
 
 const inputClass =
-  "w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#2f86cf]";
+  "w-full rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (

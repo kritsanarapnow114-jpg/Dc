@@ -51,10 +51,10 @@ export function Sidebar({
         />
       )}
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-[240px] flex-none flex-col text-[#e8f2fb] shadow-[2px_0_16px_rgba(13,20,36,.12)] transition-transform duration-200 lg:sticky lg:top-0 lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-40 flex h-screen w-[240px] flex-none flex-col text-[#fdeced] shadow-[2px_0_16px_rgba(13,20,36,.12)] transition-transform duration-200 lg:sticky lg:top-0 lg:translate-x-0 ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ background: "linear-gradient(180deg,#47a6dd,#1f5f9e)" }}
+        style={{ background: "linear-gradient(180deg,#e8313c,#8f0e16)" }}
       >
         <div className="border-b border-white/15 px-[16px] py-3.5">
           <div className="flex items-start">
@@ -72,7 +72,7 @@ export function Sidebar({
           </div>
           <div className="mt-2 text-center leading-tight">
             <div className="text-[13.5px] font-bold text-white">DC Chainat</div>
-            <div className="text-[10px] text-[#cfe4f6]">Warehouse Mgmt (ระบบคลังสินค้า)</div>
+            <div className="text-[10px] text-[#ffd6d8]">Created by Kritsana.P</div>
           </div>
         </div>
 
@@ -102,10 +102,10 @@ export function Sidebar({
                       href={item.href}
                       onClick={onClose}
                       className={`flex items-center gap-2.5 rounded-[9px] px-3 py-2 text-[13px] ${
-                        active ? "bg-white text-[#1f5f9e]" : "bg-white/[.06] text-[#e8f2fb] hover:bg-white/[.12]"
+                        active ? "bg-white text-[#8f0e16]" : "bg-white/[.06] text-[#fdeced] hover:bg-white/[.12]"
                       }`}
                     >
-                      <span className={`flex w-[22px] flex-none items-center justify-center ${active ? "text-[#1f5f9e]" : "text-white/90"}`}>
+                      <span className={`flex w-[22px] flex-none items-center justify-center ${active ? "text-[#8f0e16]" : "text-white/90"}`}>
                         <NavIcon name={item.key} />
                       </span>
                       <span className="flex-1 text-left leading-tight">
@@ -117,7 +117,7 @@ export function Sidebar({
                       {badge !== null && (
                         <span
                           className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold ${
-                            active ? "bg-[#1f5f9e]/15 text-[#1f5f9e]" : "bg-[#c53f3f] text-white"
+                            active ? "bg-[#8f0e16]/15 text-[#8f0e16]" : "bg-[#c53f3f] text-white"
                           }`}
                         >
                           {badge}
@@ -137,8 +137,8 @@ export function Sidebar({
           onClick={onClose}
           className={`mx-3 mb-1 flex items-center gap-2.5 rounded-[9px] px-3 py-2 text-[12px] ${
             pathname.startsWith("/settings")
-              ? "bg-white text-[#1f5f9e]"
-              : "bg-white/[.06] text-[#cfe4f6] hover:bg-white/[.12]"
+              ? "bg-white text-[#8f0e16]"
+              : "bg-white/[.06] text-[#ffd6d8] hover:bg-white/[.12]"
           }`}
         >
           <span className="flex w-[22px] flex-none items-center justify-center">
@@ -158,12 +158,12 @@ export function Sidebar({
             <div className="text-[12.5px] font-medium text-white">
               {user.name}
             </div>
-            <div className="text-[10.5px] text-[#cfe4f6]">{user.role}</div>
+            <div className="text-[10.5px] text-[#ffd6d8]">{user.role}</div>
           </div>
           <button
             type="submit"
             title="Sign out"
-            className="rounded-[7px] px-2 py-1 text-[11px] text-[#cfe4f6] hover:bg-white/[.12]"
+            className="rounded-[7px] px-2 py-1 text-[11px] text-[#ffd6d8] hover:bg-white/[.12]"
           >
             Exit
           </button>

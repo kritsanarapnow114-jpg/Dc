@@ -12,17 +12,17 @@ export function SkyBg({ className = "" }: { className?: string }) {
     >
       <defs>
         <linearGradient id="skGrad" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#bfe0f7" />
-          <stop offset="0.5" stopColor="#d8ecfb" />
-          <stop offset="1" stopColor="#eef7fd" />
+          <stop offset="0" stopColor="#f9d7da" />
+          <stop offset="0.5" stopColor="#fce8e9" />
+          <stop offset="1" stopColor="#fff6f6" />
         </linearGradient>
         <radialGradient id="skSun" cx="0.5" cy="0.5" r="0.5">
           <stop offset="0" stopColor="#fff3c9" stopOpacity="0.95" />
           <stop offset="1" stopColor="#fff3c9" stopOpacity="0" />
         </radialGradient>
         <linearGradient id="skBldg" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stopColor="#dcecf8" />
-          <stop offset="1" stopColor="#c6def2" />
+          <stop offset="0" stopColor="#f8e1e3" />
+          <stop offset="1" stopColor="#f0cdd0" />
         </linearGradient>
       </defs>
 
@@ -46,8 +46,8 @@ export function SkyBg({ className = "" }: { className?: string }) {
       {/* pale warehouse on the horizon */}
       <g opacity="0.9">
         <rect x="380" y="612" width="440" height="150" rx="12" fill="url(#skBldg)" />
-        <path d="M368 618 Q600 548 832 618 L832 640 Q600 570 368 640 Z" fill="#b7d4ec" />
-        <g fill="#eaf4fc" stroke="#cadff2" strokeWidth="2">
+        <path d="M368 618 Q600 548 832 618 L832 640 Q600 570 368 640 Z" fill="#eab7bb" />
+        <g fill="#fdf1f2" stroke="#f0cfd2" strokeWidth="2">
           <rect x="415" y="672" width="96" height="90" rx="7" />
           <rect x="552" y="672" width="96" height="90" rx="7" />
           <rect x="689" y="672" width="96" height="90" rx="7" />
@@ -55,7 +55,7 @@ export function SkyBg({ className = "" }: { className?: string }) {
       </g>
 
       {/* soft foreground haze */}
-      <path d="M0 720 Q300 690 600 716 T1200 704 V800 H0 Z" fill="#f2f9fe" opacity="0.85" />
+      <path d="M0 720 Q300 690 600 716 T1200 704 V800 H0 Z" fill="#fff7f7" opacity="0.85" />
     </svg>
   );
 }

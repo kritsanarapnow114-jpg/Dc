@@ -25,7 +25,7 @@ export default async function LoginPage({
               DC Chainat
             </div>
             <div className="text-[11px] text-[#69748a]">
-              Warehouse Mgmt (ระบบคลังสินค้า)
+              Created by Kritsana.P
             </div>
           </div>
         </div>

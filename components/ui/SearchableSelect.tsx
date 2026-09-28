@@ -16,7 +16,7 @@ export function SearchableSelect({
   onSelect,
   placeholder,
   value,
-  className = "w-full rounded-[9px] border border-dashed border-[#c4ccd8] bg-[#f7f9fb] px-3 py-2 text-[13px] text-[#3a4658] outline-none focus:border-[#2f86cf]",
+  className = "w-full rounded-[9px] border border-dashed border-[#c4ccd8] bg-[#f7f9fb] px-3 py-2 text-[13px] text-[#3a4658] outline-none focus:border-[#e41e2b]",
 }: {
   options: SearchableOption[];
   onSelect: (value: string) => void;

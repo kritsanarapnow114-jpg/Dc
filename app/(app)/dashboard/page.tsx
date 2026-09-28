@@ -57,17 +57,17 @@ export default async function DashboardPage({
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
           icon="◈"
-          hue="#2f86cf"
+          hue="#e41e2b"
           label="Inventory Value (มูลค่าคงเหลือ)"
           value={<Money value={stats.inventoryValue} />}
           sub={`${stats.skuCount} SKU · ${stats.lotCount} lots`}
         />
         <StatCard
           icon="↓"
-          hue="#1f66a6"
+          hue="#a8121c"
           label="Received in period (รับเข้าช่วงนี้)"
           value={stats.receivedUnits.toLocaleString()}
-          valueColor="#1f66a6"
+          valueColor="#a8121c"
           sub="units received"
         />
         <StatCard
@@ -154,7 +154,7 @@ export default async function DashboardPage({
             <div className="flex-1 text-[14px] font-semibold">
               Storage Utilization (การใช้พื้นที่)
             </div>
-            <Link href="/locations" className="text-[12px] text-[#2f86cf]">
+            <Link href="/locations" className="text-[12px] text-[#e41e2b]">
               View all →
             </Link>
           </div>
@@ -220,7 +220,7 @@ export default async function DashboardPage({
           <div className="flex-1 text-[14px] font-semibold">
             Value by Time-to-Expiry (มูลค่าตามอายุที่เหลือ)
           </div>
-          <Link href="/aging" className="text-[12px] text-[#2f86cf]">
+          <Link href="/aging" className="text-[12px] text-[#e41e2b]">
             View aging →
           </Link>
           <div className="text-[12px] text-[#69748a]">
@@ -276,7 +276,7 @@ export default async function DashboardPage({
                   <span className="w-[34px] text-[12px] text-[#69748a]">{m.label}</span>
                   <div className="h-3 flex-1 overflow-hidden rounded-[5px] bg-[#eef1f5]">
                     <div
-                      className="h-full rounded-[5px] bg-[#2f86cf]"
+                      className="h-full rounded-[5px] bg-[#e41e2b]"
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -285,7 +285,7 @@ export default async function DashboardPage({
                   </span>
                   <span
                     className="font-num w-10 text-right text-[12.5px] font-bold"
-                    style={{ color: donePct >= 100 ? "#1f66a6" : "#e59a2b" }}
+                    style={{ color: donePct >= 100 ? "#a8121c" : "#e59a2b" }}
                   >
                     {donePct.toFixed(0)}%
                   </span>
@@ -306,8 +306,8 @@ export default async function DashboardPage({
             const totPlan = countProgress.weekly.reduce((s, m) => s + m.plan, 0);
             const pct = totPlan > 0 ? (totCounted / totPlan) * 100 : 0;
             return (
-              <div className="mb-3 flex items-center gap-3 rounded-[12px] border border-[#e4eef1] bg-gradient-to-r from-[#e8f2fb] to-white p-3">
-                <div className="flex h-12 w-12 flex-none items-center justify-center rounded-full border-[3px] border-[#2f86cf] text-[13px] font-bold text-[#0c7f93]">
+              <div className="mb-3 flex items-center gap-3 rounded-[12px] border border-[#e4eef1] bg-gradient-to-r from-[#fdeced] to-white p-3">
+                <div className="flex h-12 w-12 flex-none items-center justify-center rounded-full border-[3px] border-[#e41e2b] text-[13px] font-bold text-[#b0141f]">
                   {pct.toFixed(0)}%
                 </div>
                 <div className="leading-tight">
@@ -333,7 +333,7 @@ export default async function DashboardPage({
                   <div className="h-3 flex-1 overflow-hidden rounded-[5px] bg-[#eef1f5]">
                     <div
                       className="h-full rounded-[5px]"
-                      style={{ width: `${pct}%`, background: donePct >= 100 ? "#2aa775" : "#2f86cf" }}
+                      style={{ width: `${pct}%`, background: donePct >= 100 ? "#2aa775" : "#e41e2b" }}
                     />
                   </div>
                   <span className="font-num w-24 text-right text-[11.5px] text-[#9aa4b4]">
@@ -341,7 +341,7 @@ export default async function DashboardPage({
                   </span>
                   <span
                     className="font-num w-10 text-right text-[12.5px] font-bold"
-                    style={{ color: donePct >= 100 ? "#1f66a6" : "#e59a2b" }}
+                    style={{ color: donePct >= 100 ? "#a8121c" : "#e59a2b" }}
                   >
                     {donePct.toFixed(0)}%
                   </span>
@@ -364,7 +364,7 @@ export default async function DashboardPage({
               <div key={d.code} className="flex items-center gap-2.5 text-[13px]">
                 <span className="font-num w-16 text-[11px] text-[#9aa4b4]">{d.code}</span>
                 <span className="flex-1">{d.name}</span>
-                <span className="font-num font-semibold text-[#1f66a6]">+{d.qty.toLocaleString()}</span>
+                <span className="font-num font-semibold text-[#a8121c]">+{d.qty.toLocaleString()}</span>
               </div>
             ))}
             {movementDetail.received.length === 0 && (

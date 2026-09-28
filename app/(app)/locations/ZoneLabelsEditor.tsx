@@ -56,7 +56,7 @@ export function ZoneLabelsEditor({
                 value={values[z] ?? ""}
                 onChange={(e) => setValues((v) => ({ ...v, [z]: e.target.value }))}
                 placeholder="เช่น วัตถุดิบแห้ง / บรรจุภัณฑ์ / สินค้าสำเร็จรูป"
-                className="min-w-0 flex-1 rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#2f86cf]"
+                className="min-w-0 flex-1 rounded-[8px] border border-[#d7dce4] px-2.5 py-2 text-[13px] outline-none focus:border-[#e41e2b]"
               />
             </label>
           ))}
