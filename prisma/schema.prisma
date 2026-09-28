@@ -1,0 +1,488 @@
+// NBC Warehouse — data model
+// See /root/.claude/plans/abstract-roaming-hummingbird.md for the full plan.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Category {
+  RAW_MATERIAL
+  PACKAGING
+  FINISHED_GOODS
+  SPARE_PARTS
+}
+
+enum Zone {
+  A
+  B
+  C
+  D
+  E
+}
+
+enum LotStatus {
+  OK
+  QC
+}
+
+enum ReceiptMode {
+  PO
+}
+
+enum POStatus {
+  OPEN
+  PENDING
+  COMPLETE
+}
+
+enum AdjustReason {
+  COUNT_VARIANCE
+  DAMAGED
+  EXPIRED
+  QC_REJECT
+}
+
+enum KpiKey {
+  SAFETY
+  COST
+  DELIVERY
+}
+
+model User {
+  id             String   @id @default(cuid())
+  email          String   @unique
+  passwordHash   String
+  name           String
+  role           String   @default("Warehouse Lead")
+  permission     String   @default("staff") // access level: admin | staff | viewer
+  avatarInitials String   @default("U")
+  createdAt      DateTime @default(now())
+}
+
+model Product {
+  code          String    @id
+  nameEn        String
+  nameTh        String?
+  category      Category
+  unit          String
+  price         Float
+  pallet        Int       @default(500)
+  width         Float // storage footprint, m
+  length        Float // storage footprint, m
+  stackLevels   Int       @default(1)
+  containerType String    @default("OTHER") // IBC / SUPERSACK / BOX / OCTABIN / BAG / DRUM / OTHER
+  minQty        Float     @default(0) // reorder point; 0 = not set
+  maxQty        Float     @default(0) // stock ceiling; 0 = not set
+  deletedAt     DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  lots           Lot[]
+  poLines        PurchaseOrderLine[]
+  shipOrderLines ShipOrderLine[]
+  receiptLines   ReceiptLine[]
+  issueLines     IssueLine[]
+  returnLines    CustomerReturnLine[]
+
+  @@index([category])
+}
+
+model Location {
+  code       String    @id
+  zone       Zone
+  width      Float // m
+  length     Float // m
+  mapOrder   Int? // custom display order within its zone on the Map page (drag to arrange)
+  stackUsed  Int? // actual pallet-stack height used in this bin (may be < product's max)
+  slotMap    Json? // custom pallet arrangement inside the bin: [{s:spot,l:level,lot:lotId}]
+  extraItems Json? // non-stock items placed here (Reuse, empty pallets…): [{id,label,pallets}]
+  archivedAt DateTime? // soft-delete: hidden from all views but kept for lot history
+
+  lots Lot[]
+
+  @@index([zone])
+}
+
+model Lot {
+  id           String    @id @default(cuid())
+  productCode  String
+  product      Product   @relation(fields: [productCode], references: [code])
+  locationCode String
+  location     Location  @relation(fields: [locationCode], references: [code])
+  lotNo        String // "-" sentinel = not lot-tracked (spare parts)
+  qty          Float
+  status       LotStatus @default(OK)
+  recvDate     DateTime
+  mfgDate      DateTime?
+  expDate      DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  receiptLines     ReceiptLine[]
+  issueLinesFefo   IssueLine[]          @relation("FefoLot")
+  issueLinesSel    IssueLine[]          @relation("SelectedLot")
+  adjustmentLines  AdjustmentLine[]
+  transferLinesOut TransferLine[]
+  stockCountLines  StockCountLine[]
+  returnLines      CustomerReturnLine[]
+
+  @@index([productCode])
+  @@index([locationCode])
+  @@index([status])
+  @@index([expDate])
+}
+
+model PurchaseOrder {
+  id     String              @id @default(cuid())
+  no     String              @unique
+  vendor String
+  date   DateTime
+  status POStatus            @default(OPEN)
+  lines  PurchaseOrderLine[]
+
+  receipts Receipt[]
+
+  @@index([status])
+}
+
+model PurchaseOrderLine {
+  id          String        @id @default(cuid())
+  poId        String
+  po          PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  productCode String
+  product     Product       @relation(fields: [productCode], references: [code])
+  ordered     Float
+  received    Float         @default(0)
+}
+
+model Receipt {
+  id          String         @id @default(cuid())
+  docNo       String         @unique
+  mode        ReceiptMode
+  poId        String?
+  po          PurchaseOrder? @relation(fields: [poId], references: [id])
+  invoiceNo   String? // only meaningful when mode = PO
+  materialDoc String? // SAP Material Document number
+  remark      String? // free-text note
+  docDate     DateTime
+  reversedAt  DateTime? // set when the document is reversed/voided
+  createdAt   DateTime       @default(now())
+
+  lines ReceiptLine[]
+
+  @@index([mode])
+  @@index([docDate])
+}
+
+model ReceiptLine {
+  id           String    @id @default(cuid())
+  receiptId    String
+  receipt      Receipt   @relation(fields: [receiptId], references: [id], onDelete: Cascade)
+  productCode  String
+  product      Product   @relation(fields: [productCode], references: [code])
+  orderedQty   Float?
+  recvQty      Float
+  lotNo        String
+  locationCode String
+  mfgDate      DateTime?
+  expDate      DateTime?
+  lotId        String?
+  lot          Lot?      @relation(fields: [lotId], references: [id])
+}
+
+enum IssueType {
+  INTERNAL // เบิกใช้ภายใน (production line, write-off, etc.)
+  EXTERNAL // ขายออกภายนอกให้ลูกค้า (has a customer + ship-to)
+}
+
+model Issue {
+  id          String    @id @default(cuid())
+  docNo       String    @unique
+  issueType   IssueType @default(INTERNAL)
+  issueTo     String // "Production - Line A" | "Production - Line B" | "Wholesale - Customer" | "Write-off"
+  materialDoc String? // SAP Material Document number
+  remark      String? // free-text note
+  docDate     DateTime
+  shippedDate DateTime? // actual ship date, drives Delivery on-time KPI
+  reversedAt  DateTime? // set when the document is reversed/voided
+  createdAt   DateTime  @default(now())
+
+  // Ship-to (sales outbound to a customer). The ids link to the current master
+  // records; shipToName/shipToAddress snapshot the values at issue time so the
+  // document and its printout stay correct even if the customer is edited later.
+  customerId    String?
+  customer      Customer?      @relation(fields: [customerId], references: [id])
+  shipToId      String?
+  shipTo        ShipToAddress? @relation(fields: [shipToId], references: [id])
+  shipToName    String? // snapshot: customer name at issue time
+  shipToAddress String? // snapshot: ship-to address at issue time
+
+  // The Ship Order this goods issue fulfils (null for ad-hoc / internal issues).
+  shipOrderId String?
+  shipOrder   ShipOrder? @relation(fields: [shipOrderId], references: [id])
+
+  lines IssueLine[]
+
+  returns CustomerReturn[] // customer returns raised against this shipment
+
+  @@index([docDate])
+  @@index([customerId])
+  @@index([shipOrderId])
+}
+
+model Customer {
+  id        String   @id @default(cuid())
+  code      String?  @unique // optional customer code (e.g. SAP sold-to)
+  name      String
+  phone     String?
+  taxId     String?
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  shipTos    ShipToAddress[]
+  issues     Issue[]
+  shipOrders ShipOrder[]
+
+  returns CustomerReturn[]
+
+  @@index([name])
+}
+
+model ShipToAddress {
+  id         String   @id @default(cuid())
+  customerId String
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  label      String // e.g. "คลังหลัก" / "สาขา 2" / "Head office"
+  address    String // full ship-to address
+  isDefault  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  issues     Issue[]
+  shipOrders ShipOrder[]
+
+  @@index([customerId])
+}
+
+/**
+ * Outbound sales/ship order: what a customer ordered and where it goes. Stock
+ * is NOT moved on creation — it moves only when the order is shipped (fulfilled),
+ * which creates one EXTERNAL goods Issue per shipment (FEFO), linked back here.
+ */
+enum ShipOrderStatus {
+  OPEN // รอจัดส่ง — created, nothing shipped yet
+  PENDING // ส่งบางส่วน — partially shipped
+  COMPLETE // ส่งครบแล้ว — fully shipped
+}
+
+model ShipOrder {
+  id     String          @id @default(cuid())
+  no     String          @unique
+  status ShipOrderStatus @default(OPEN)
+
+  // Customer + ship-to. The ids link to the current master records; the
+  // shipToName/shipToAddress columns snapshot the values at order time so the
+  // document stays correct even if the customer/address is edited later.
+  customerId    String
+  customer      Customer       @relation(fields: [customerId], references: [id])
+  shipToId      String?
+  shipTo        ShipToAddress? @relation(fields: [shipToId], references: [id])
+  shipToName    String? // snapshot: customer name at order time
+  shipToAddress String? // snapshot: ship-to address at order time
+
+  orderDate         DateTime // วันสั่ง — when the customer placed the order
+  requestedShipDate DateTime? // วันนัดส่ง — requested delivery/ship date
+  tracking          String? // เลข tracking / carrier reference
+  remark            String?
+  createdAt         DateTime  @default(now())
+
+  lines  ShipOrderLine[]
+  issues Issue[] // shipments (goods issues) that fulfil this order
+
+  @@index([status])
+  @@index([customerId])
+}
+
+model ShipOrderLine {
+  id          String    @id @default(cuid())
+  soId        String
+  so          ShipOrder @relation(fields: [soId], references: [id], onDelete: Cascade)
+  productCode String
+  product     Product   @relation(fields: [productCode], references: [code])
+  ordered     Float
+  shipped     Float     @default(0)
+}
+
+model IssueLine {
+  id            String  @id @default(cuid())
+  issueId       String
+  issue         Issue   @relation(fields: [issueId], references: [id], onDelete: Cascade)
+  productCode   String
+  product       Product @relation(fields: [productCode], references: [code])
+  fefoLotId     String?
+  fefoLot       Lot?    @relation("FefoLot", fields: [fefoLotId], references: [id])
+  selectedLotId String?
+  selectedLot   Lot?    @relation("SelectedLot", fields: [selectedLotId], references: [id])
+  qty           Float
+}
+
+model Adjustment {
+  id         String       @id @default(cuid())
+  docNo      String       @unique
+  reason     AdjustReason @default(COUNT_VARIANCE)
+  note       String? // free-text remark: why the loss/adjustment happened
+  docDate    DateTime
+  reversedAt DateTime? // set when the document is reversed/voided
+
+  lines AdjustmentLine[]
+}
+
+model AdjustmentLine {
+  id           String     @id @default(cuid())
+  adjustmentId String
+  adjustment   Adjustment @relation(fields: [adjustmentId], references: [id], onDelete: Cascade)
+  lotId        String
+  lot          Lot        @relation(fields: [lotId], references: [id])
+  sysQty       Float
+  countedQty   Float
+}
+
+model Transfer {
+  id         String    @id @default(cuid())
+  docNo      String    @unique
+  operator   String
+  docDate    DateTime
+  reversedAt DateTime? // set when the document is reversed/voided
+
+  lines TransferLine[]
+}
+
+model TransferLine {
+  id               String   @id @default(cuid())
+  transferId       String
+  transfer         Transfer @relation(fields: [transferId], references: [id], onDelete: Cascade)
+  lotId            String
+  lot              Lot      @relation(fields: [lotId], references: [id])
+  fromLocationCode String
+  toLocationCode   String
+  qty              Float
+}
+
+model StockCount {
+  id         String    @id @default(cuid())
+  docNo      String    @unique
+  pullZone   String // "All zones" | "Zone A - Raw Material" | ...
+  docDate    DateTime
+  reversedAt DateTime? // set when the document is reversed/voided
+
+  lines StockCountLine[]
+}
+
+model StockCountLine {
+  id           String     @id @default(cuid())
+  stockCountId String
+  stockCount   StockCount @relation(fields: [stockCountId], references: [id], onDelete: Cascade)
+  lotId        String
+  lot          Lot        @relation(fields: [lotId], references: [id])
+  sysQty       Float
+  countedQty   Float
+  addedQty     Float      @default(0) // stock this line actually added (off-system finds); 0 for plain counts
+}
+
+model DocSequence {
+  id      String @id @default(cuid())
+  prefix  String
+  beYear  Int
+  lastSeq Int    @default(0)
+
+  @@unique([prefix, beYear])
+}
+
+/**
+ * Marks one-time seed steps (e.g. a bulk product import) as already applied,
+ * so re-running seed on every deploy doesn't re-create rows the user deleted.
+ */
+model SeedFlag {
+  key       String   @id
+  appliedAt DateTime @default(now())
+}
+
+/**
+ * Generic editable key-value settings (page subtitles, stock-count plan
+ * targets, etc.) so non-code text/config can be changed from the UI.
+ */
+model AppSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model KpiLog {
+  id         String   @id @default(cuid())
+  key        KpiKey
+  date       DateTime
+  detail     String?
+  amount     Float? // COST
+  incident   Boolean? // SAFETY (false = baseline/reset entry, not a real incident)
+  issueDocNo String? // DELIVERY
+  onTime     Boolean? // DELIVERY
+  createdAt  DateTime @default(now())
+
+  @@index([key])
+}
+
+/**
+ * What happens to returned goods after the QC check at the dock.
+ */
+enum ReturnDisposition {
+  RESTOCK // สภาพดี — back into sellable stock (lot status OK)
+  HOLD // รอตรวจ/กักไว้ — back into stock on QC hold (never picked by FEFO)
+  SCRAP // เสียหาย/ทิ้ง — recorded only, no stock is created
+}
+
+/**
+ * Customer return (รับคืนสินค้าจากลูกค้า). Optionally linked to the original
+ * shipment (Issue) so the return can be traced to the order it came from.
+ */
+model CustomerReturn {
+  id         String    @id @default(cuid())
+  docNo      String    @unique
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id])
+  issueId    String? // original shipment / goods issue being returned
+  issue      Issue?    @relation(fields: [issueId], references: [id])
+  reason     String // e.g. "สินค้าเสียหาย", "ส่งผิด", "ใกล้หมดอายุ", "ลูกค้าปฏิเสธรับ"
+  remark     String?
+  docDate    DateTime
+  reversedAt DateTime? // set when the document is reversed/voided
+  createdAt  DateTime  @default(now())
+
+  lines CustomerReturnLine[]
+
+  @@index([docDate])
+  @@index([customerId])
+  @@index([issueId])
+}
+
+model CustomerReturnLine {
+  id             String            @id @default(cuid())
+  returnId       String
+  customerReturn CustomerReturn    @relation(fields: [returnId], references: [id], onDelete: Cascade)
+  productCode    String
+  product        Product           @relation(fields: [productCode], references: [code])
+  lotNo          String
+  locationCode   String? // where the goods were put (null for SCRAP)
+  qty            Float
+  mfgDate        DateTime?
+  expDate        DateTime?
+  disposition    ReturnDisposition
+  lotId          String? // the stock lot the goods were booked into (null for SCRAP)
+  lot            Lot?              @relation(fields: [lotId], references: [id])
+
+  @@index([productCode])
+}
