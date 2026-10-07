@@ -28,24 +28,21 @@ export const NAV_ITEMS: NavItem[] = [
 
 /** Sidebar sections: a big heading with its sub-items, so the long menu is
  *  easier to scan. Item keys reference NAV_ITEMS above. */
-export type NavGroup = { key: string; en: string; th: string; items: string[] };
+export type NavGroup = { key: string; en: string; th: string; hue: string; items: string[] };
 
+// `hue` tints each section's icons so the long menu is easy to scan.
 export const NAV_GROUPS: NavGroup[] = [
-  { key: "overview", en: "Overview", th: "ภาพรวม", items: ["dashboard"] },
+  { key: "overview", en: "Overview", th: "ภาพรวม", hue: "#f87171", items: ["dashboard"] },
   {
     key: "inventory",
     en: "Inventory",
-    th: "สินค้าคงคลัง",
+    th: "คลังสินค้า",
+    hue: "#fbbf24",
     items: ["products", "stockcard", "aging", "locations", "map", "adjust", "count"],
   },
-  { key: "inbound", en: "Inbound", th: "ขาเข้า", items: ["receive", "po", "transfer", "returns"] },
-  { key: "outbound", en: "Outbound", th: "ขาออก", items: ["ship", "issue", "customers"] },
-  {
-    key: "analytics",
-    en: "Analytics & Reports",
-    th: "วิเคราะห์ & รายงาน",
-    items: ["abc", "reports"],
-  },
+  { key: "inbound", en: "Inbound", th: "ขาเข้า", hue: "#34d399", items: ["receive", "po", "transfer", "returns"] },
+  { key: "outbound", en: "Outbound", th: "ขาออก", hue: "#60a5fa", items: ["ship", "issue", "customers"] },
+  { key: "analytics", en: "Reports", th: "รายงาน", hue: "#a78bfa", items: ["abc", "reports"] },
 ];
 
 export const PAGE_TITLES: Record<string, { title: string; sub: string }> = {
